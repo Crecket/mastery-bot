@@ -19,7 +19,11 @@ module.exports = {
     // Check if a reddit submission id is already stored
     is_checked: (id, callback) => {
         this.db.run("SELECT * FROM comments WHERE id = ?", [id], (result) => {
-            callback(!result);
+            var found = true;
+            if (!result) {
+                found = false;
+            }
+            return callback({id: id, found: found});
         });
     },
 

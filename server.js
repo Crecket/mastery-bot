@@ -25,9 +25,9 @@ function checkMessages() {
 
                 // check if we've already done this ID
                 DatabaseHandler.is_checked(messageId, (check_result) => {
-                    if (check_result) {
+                    if (check_result.found === false) {
                         // this ID is new
-                        DatabaseHandler.insert_id(messageId);
+                        DatabaseHandler.insert_id(check_result.id);
 
                         // parse all users from the comment
                         var resultingUsers = Utils.parseBody(message.body);
@@ -37,7 +37,7 @@ function checkMessages() {
 
                         }
                     } else {
-                        console.log(check_result + ' Id Exists');
+                        console.log('Id Exists: ' + check_result.id);
                     }
                 });
 
