@@ -1,0 +1,4 @@
+/src/config.js
+/node_modules
+#Default database exclude
+/database.db
