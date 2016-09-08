@@ -2,3 +2,4 @@
 /node_modules
 #Default database exclude
 /database.db
+/npm-debug.log

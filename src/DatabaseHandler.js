@@ -8,7 +8,7 @@ module.exports = {
     init: (sqlite_location) => {
         this.db = new sqlite3.Database(sqlite_location);
         // this.db.run("CREATE TABLE IF NOT EXISTS submissions(id TEXT PRIMARY KEY NOT NULL)");
-        this.db.run("CREATE TABLE IF NOT EXISTS comments(id TEXT PRIMARY KEY)");
+        this.db.run("CREATE TABLE IF NOT EXISTS comments(id TEXT PRIMARY KEY, status INTEGER)");
     },
 
     // Close database connection
@@ -18,17 +18,28 @@ module.exports = {
 
     // Check if a reddit submission id is already stored
     is_checked: (id, callback) => {
-        this.db.run("SELECT * FROM comments WHERE id = ?", [id], (result) => {
-            var found = true;
-            if (!result) {
-                found = false;
-            }
-            return callback({id: id, found: found});
-        });
+        try {
+            this.db.get("SELECT * FROM comments WHERE id = ?", id, (err, row) => {
+                if(err){
+                    console.log(err);
+                    return;
+                }
+
+                var found = true;
+                if (!row) {
+                    found = false;
+                }
+
+                callback({id: id, found: found});
+            });
+        } catch (ex) {
+            return callback({id: id, found: false});
+        }
+
     },
 
     // Check if a reddit submission id is already stored
     insert_id: (id) => {
-        this.db.run("INSERT INTO comments (id) VALUES (?)", [id]);
+        this.db.run("INSERT INTO comments (id, status) VALUES (?, 0)", [id]);
     }
 };

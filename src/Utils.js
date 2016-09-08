@@ -24,7 +24,10 @@ module.exports = {
                 var summonerName = tempSplit[0];
                 var summonerServer = tempSplit[1];
                 // push to result list
-                result_summoners.push({summoner: summonerName, server: summonerServer});
+                result_summoners.push({
+                    summoner: summonerName,
+                    server: summonerServer
+                });
             }
         }
 
