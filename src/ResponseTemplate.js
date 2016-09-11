@@ -24,6 +24,7 @@ module.exports = function (summoner_info, summoner_mastery, topChampions) {
         "---------|----------|----------\n";
     for (var key in topChampions) {
         result += "[" + champions[topChampions[key]['champion']]['name'] + "]" +
+            "[](#c-" + champions[topChampions[key]['champion']]['name'] + ")" + // icon
             "(https://www.masterypoints.com/highscores/champion/" + champions[topChampions[key]['champion']]['name'] + ")|" +
             topChampions[key]['points'] + "|" +
             topChampions[key]['mastery_level'] + "\n";

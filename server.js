@@ -23,6 +23,7 @@ const r = new snoowrap({
 function checkMessages() {
     r.get_unread_messages().then((messages) => {
         console.log('New unread messages: ' + messages.length);
+
         messages.map((message, index) => {
             // we only check comments
             if (message.was_comment) {
@@ -69,6 +70,7 @@ function checkMessages() {
                                     try{
                                         message.reply(markupCode);
                                     }catch(err){
+                                        console.log(err);
                                     }
 
                                 },
