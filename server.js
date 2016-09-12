@@ -7,11 +7,10 @@ var RequestHandler = require('./src/RequestHandler.js');
 var ResponseTemplate = require('./src/ResponseTemplate.js');
 var Utils = require('./src/Utils.js');
 
-var champions = '{"champions": {"1": {"id": "1","name": "Annie","pretty_name": "annie","title": "the Dark Child","champkey": "Annie","img": "/assets/img/lol/champion_icons/1.png"},"2": {"id": "2","name": "Olaf","pretty_name": "olaf","title": "the Berserker","champkey": "Olaf","img": "/assets/img/lol/champion_icons/2.png"},"3": {"id": "3","name": "Galio","pretty_name": "galio","title": "the Sentinel\'s Sorrow","champkey": "Galio","img": "/assets/img/lol/champion_icons/3.png"},"4": {"id": "4","name": "Twisted Fate","pretty_name": "twistedfate","title": "the Card Master","champkey": "TwistedFate","img": "/assets/img/lol/champion_icons/4.png"},"5": {"id": "5","name": "Xin Zhao","pretty_name": "xinzhao","title": "the Seneschal of Demacia","champkey": "XinZhao","img": "/assets/img/lol/champion_icons/5.png"},"6": {"id": "6","name": "Urgot","pretty_name": "urgot","title": "the Headsman\'s Pride","champkey": "Urgot","img": "/assets/img/lol/champion_icons/6.png"},"7": {"id": "7","name": "LeBlanc","pretty_name": "leblanc","title": "the Deceiver","champkey": "Leblanc","img": "/assets/img/lol/champion_icons/7.png"},"8": {"id": "8","name": "Vladimir","pretty_name": "vladimir","title": "the Crimson Reaper","champkey": "Vladimir","img": "/assets/img/lol/champion_icons/8.png"},"9": {"id": "9","name": "Fiddlesticks","pretty_name": "fiddlesticks","title": "the Harbinger of Doom","champkey": "FiddleSticks","img": "/assets/img/lol/champion_icons/9.png"},"10": {"id": "10","name": "Kayle","pretty_name": "kayle","title": "The Judicator","champkey": "Kayle","img": "/assets/img/lol/champion_icons/10.png"},"11": {"id": "11","name": "Master Yi","pretty_name": "masteryi","title": "the Wuju Bladesman","champkey": "MasterYi","img": "/assets/img/lol/champion_icons/11.png"},"12": {"id": "12","name": "Alistar","pretty_name": "alistar","title": "the Minotaur","champkey": "Alistar","img": "/assets/img/lol/champion_icons/12.png"},"13": {"id": "13","name": "Ryze","pretty_name": "ryze","title": "the Rogue Mage","champkey": "Ryze","img": "/assets/img/lol/champion_icons/13.png"},"14": {"id": "14","name": "Sion","pretty_name": "sion","title": "The Undead Juggernaut","champkey": "Sion","img": "/assets/img/lol/champion_icons/14.png"},"15": {"id": "15","name": "Sivir","pretty_name": "sivir","title": "the Battle Mistress","champkey": "Sivir","img": "/assets/img/lol/champion_icons/15.png"},"16": {"id": "16","name": "Soraka","pretty_name": "soraka","title": "the Starchild","champkey": "Soraka","img": "/assets/img/lol/champion_icons/16.png"},"17": {"id": "17","name": "Teemo","pretty_name": "teemo","title": "the Swift Scout","champkey": "Teemo","img": "/assets/img/lol/champion_icons/17.png"},"18": {"id": "18","name": "Tristana","pretty_name": "tristana","title": "the Yordle Gunner","champkey": "Tristana","img": "/assets/img/lol/champion_icons/18.png"},"19": {"id": "19","name": "Warwick","pretty_name": "warwick","title": "the Blood Hunter","champkey": "Warwick","img": "/assets/img/lol/champion_icons/19.png"},"20": {"id": "20","name": "Nunu","pretty_name": "nunu","title": "the Yeti Rider","champkey": "Nunu","img": "/assets/img/lol/champion_icons/20.png"},"21": {"id": "21","name": "Miss Fortune","pretty_name": "missfortune","title": "the Bounty Hunter","champkey": "MissFortune","img": "/assets/img/lol/champion_icons/21.png"},"22": {"id": "22","name": "Ashe","pretty_name": "ashe","title": "the Frost Archer","champkey": "Ashe","img": "/assets/img/lol/champion_icons/22.png"},"23": {"id": "23","name": "Tryndamere","pretty_name": "tryndamere","title": "the Barbarian King","champkey": "Tryndamere","img": "/assets/img/lol/champion_icons/23.png"},"24": {"id": "24","name": "Jax","pretty_name": "jax","title": "Grandmaster at Arms","champkey": "Jax","img": "/assets/img/lol/champion_icons/24.png"},"25": {"id": "25","name": "Morgana","pretty_name": "morgana","title": "Fallen Angel","champkey": "Morgana","img": "/assets/img/lol/champion_icons/25.png"},"26": {"id": "26","name": "Zilean","pretty_name": "zilean","title": "the Chronokeeper","champkey": "Zilean","img": "/assets/img/lol/champion_icons/26.png"},"27": {"id": "27","name": "Singed","pretty_name": "singed","title": "the Mad Chemist","champkey": "Singed","img": "/assets/img/lol/champion_icons/27.png"},"28": {"id": "28","name": "Evelynn","pretty_name": "evelynn","title": "the Widowmaker","champkey": "Evelynn","img": "/assets/img/lol/champion_icons/28.png"},"29": {"id": "29","name": "Twitch","pretty_name": "twitch","title": "the Plague Rat","champkey": "Twitch","img": "/assets/img/lol/champion_icons/29.png"},"30": {"id": "30","name": "Karthus","pretty_name": "karthus","title": "the Deathsinger","champkey": "Karthus","img": "/assets/img/lol/champion_icons/30.png"},"31": {"id": "31","name": "Cho\'Gath","pretty_name": "cho\'gath","title": "the Terror of the Void","champkey": "Chogath","img": "/assets/img/lol/champion_icons/31.png"},"32": {"id": "32","name": "Amumu","pretty_name": "amumu","title": "the Sad Mummy","champkey": "Amumu","img": "/assets/img/lol/champion_icons/32.png"},"33": {"id": "33","name": "Rammus","pretty_name": "rammus","title": "the Armordillo","champkey": "Rammus","img": "/assets/img/lol/champion_icons/33.png"},"34": {"id": "34","name": "Anivia","pretty_name": "anivia","title": "the Cryophoenix","champkey": "Anivia","img": "/assets/img/lol/champion_icons/34.png"},"35": {"id": "35","name": "Shaco","pretty_name": "shaco","title": "the Demon Jester","champkey": "Shaco","img": "/assets/img/lol/champion_icons/35.png"},"36": {"id": "36","name": "Dr. Mundo","pretty_name": "drmundo","title": "the Madman of Zaun","champkey": "DrMundo","img": "/assets/img/lol/champion_icons/36.png"},"37": {"id": "37","name": "Sona","pretty_name": "sona","title": "Maven of the Strings","champkey": "Sona","img": "/assets/img/lol/champion_icons/37.png"},"38": {"id": "38","name": "Kassadin","pretty_name": "kassadin","title": "the Void Walker","champkey": "Kassadin","img": "/assets/img/lol/champion_icons/38.png"},"39": {"id": "39","name": "Irelia","pretty_name": "irelia","title": "the Will of the Blades","champkey": "Irelia","img": "/assets/img/lol/champion_icons/39.png"},"40": {"id": "40","name": "Janna","pretty_name": "janna","title": "the Storm\'s Fury","champkey": "Janna","img": "/assets/img/lol/champion_icons/40.png"},"41": {"id": "41","name": "Gangplank","pretty_name": "gangplank","title": "the Saltwater Scourge","champkey": "Gangplank","img": "/assets/img/lol/champion_icons/41.png"},"42": {"id": "42","name": "Corki","pretty_name": "corki","title": "the Daring Bombardier","champkey": "Corki","img": "/assets/img/lol/champion_icons/42.png"},"43": {"id": "43","name": "Karma","pretty_name": "karma","title": "the Enlightened One","champkey": "Karma","img": "/assets/img/lol/champion_icons/43.png"},"44": {"id": "44","name": "Taric","pretty_name": "taric","title": "the Gem Knight","champkey": "Taric","img": "/assets/img/lol/champion_icons/44.png"},"45": {"id": "45","name": "Veigar","pretty_name": "veigar","title": "the Tiny Master of Evil","champkey": "Veigar","img": "/assets/img/lol/champion_icons/45.png"},"48": {"id": "48","name": "Trundle","pretty_name": "trundle","title": "the Troll King","champkey": "Trundle","img": "/assets/img/lol/champion_icons/48.png"},"50": {"id": "50","name": "Swain","pretty_name": "swain","title": "the Master Tactician","champkey": "Swain","img": "/assets/img/lol/champion_icons/50.png"},"51": {"id": "51","name": "Caitlyn","pretty_name": "caitlyn","title": "the Sheriff of Piltover","champkey": "Caitlyn","img": "/assets/img/lol/champion_icons/51.png"},"53": {"id": "53","name": "Blitzcrank","pretty_name": "blitzcrank","title": "the Great Steam Golem","champkey": "Blitzcrank","img": "/assets/img/lol/champion_icons/53.png"},"54": {"id": "54","name": "Malphite","pretty_name": "malphite","title": "Shard of the Monolith","champkey": "Malphite","img": "/assets/img/lol/champion_icons/54.png"},"55": {"id": "55","name": "Katarina","pretty_name": "katarina","title": "the Sinister Blade","champkey": "Katarina","img": "/assets/img/lol/champion_icons/55.png"},"56": {"id": "56","name": "Nocturne","pretty_name": "nocturne","title": "the Eternal Nightmare","champkey": "Nocturne","img": "/assets/img/lol/champion_icons/56.png"},"57": {"id": "57","name": "Maokai","pretty_name": "maokai","title": "the Twisted Treant","champkey": "Maokai","img": "/assets/img/lol/champion_icons/57.png"},"58": {"id": "58","name": "Renekton","pretty_name": "renekton","title": "the Butcher of the Sands","champkey": "Renekton","img": "/assets/img/lol/champion_icons/58.png"},"59": {"id": "59","name": "Jarvan IV","pretty_name": "jarvaniv","title": "the Exemplar of Demacia","champkey": "JarvanIV","img": "/assets/img/lol/champion_icons/59.png"},"60": {"id": "60","name": "Elise","pretty_name": "elise","title": "The Spider Queen","champkey": "Elise","img": "/assets/img/lol/champion_icons/60.png"},"61": {"id": "61","name": "Orianna","pretty_name": "orianna","title": "the Lady of Clockwork","champkey": "Orianna","img": "/assets/img/lol/champion_icons/61.png"},"62": {"id": "62","name": "Wukong","pretty_name": "wukong","title": "the Monkey King","champkey": "MonkeyKing","img": "/assets/img/lol/champion_icons/62.png"},"63": {"id": "63","name": "Brand","pretty_name": "brand","title": "the Burning Vengeance","champkey": "Brand","img": "/assets/img/lol/champion_icons/63.png"},"64": {"id": "64","name": "Lee Sin","pretty_name": "leesin","title": "the Blind Monk","champkey": "LeeSin","img": "/assets/img/lol/champion_icons/64.png"},"67": {"id": "67","name": "Vayne","pretty_name": "vayne","title": "the Night Hunter","champkey": "Vayne","img": "/assets/img/lol/champion_icons/67.png"},"68": {"id": "68","name": "Rumble","pretty_name": "rumble","title": "the Mechanized Menace","champkey": "Rumble","img": "/assets/img/lol/champion_icons/68.png"},"69": {"id": "69","name": "Cassiopeia","pretty_name": "cassiopeia","title": "the Serpent\'s Embrace","champkey": "Cassiopeia","img": "/assets/img/lol/champion_icons/69.png"},"72": {"id": "72","name": "Skarner","pretty_name": "skarner","title": "the Crystal Vanguard","champkey": "Skarner","img": "/assets/img/lol/champion_icons/72.png"},"74": {"id": "74","name": "Heimerdinger","pretty_name": "heimerdinger","title": "the Revered Inventor","champkey": "Heimerdinger","img": "/assets/img/lol/champion_icons/74.png"},"75": {"id": "75","name": "Nasus","pretty_name": "nasus","title": "the Curator of the Sands","champkey": "Nasus","img": "/assets/img/lol/champion_icons/75.png"},"76": {"id": "76","name": "Nidalee","pretty_name": "nidalee","title": "the Bestial Huntress","champkey": "Nidalee","img": "/assets/img/lol/champion_icons/76.png"},"77": {"id": "77","name": "Udyr","pretty_name": "udyr","title": "the Spirit Walker","champkey": "Udyr","img": "/assets/img/lol/champion_icons/77.png"},"78": {"id": "78","name": "Poppy","pretty_name": "poppy","title": "the Iron Ambassador","champkey": "Poppy","img": "/assets/img/lol/champion_icons/78.png"},"79": {"id": "79","name": "Gragas","pretty_name": "gragas","title": "the Rabble Rouser","champkey": "Gragas","img": "/assets/img/lol/champion_icons/79.png"},"80": {"id": "80","name": "Pantheon","pretty_name": "pantheon","title": "the Artisan of War","champkey": "Pantheon","img": "/assets/img/lol/champion_icons/80.png"},"81": {"id": "81","name": "Ezreal","pretty_name": "ezreal","title": "the Prodigal Explorer","champkey": "Ezreal","img": "/assets/img/lol/champion_icons/81.png"},"82": {"id": "82","name": "Mordekaiser","pretty_name": "mordekaiser","title": "the Master of Metal","champkey": "Mordekaiser","img": "/assets/img/lol/champion_icons/82.png"},"83": {"id": "83","name": "Yorick","pretty_name": "yorick","title": "the Gravedigger","champkey": "Yorick","img": "/assets/img/lol/champion_icons/83.png"},"84": {"id": "84","name": "Akali","pretty_name": "akali","title": "the Fist of Shadow","champkey": "Akali","img": "/assets/img/lol/champion_icons/84.png"},"85": {"id": "85","name": "Kennen","pretty_name": "kennen","title": "the Heart of the Tempest","champkey": "Kennen","img": "/assets/img/lol/champion_icons/85.png"},"86": {"id": "86","name": "Garen","pretty_name": "garen","title": "The Might of Demacia","champkey": "Garen","img": "/assets/img/lol/champion_icons/86.png"},"89": {"id": "89","name": "Leona","pretty_name": "leona","title": "the Radiant Dawn","champkey": "Leona","img": "/assets/img/lol/champion_icons/89.png"},"90": {"id": "90","name": "Malzahar","pretty_name": "malzahar","title": "the Prophet of the Void","champkey": "Malzahar","img": "/assets/img/lol/champion_icons/90.png"},"91": {"id": "91","name": "Talon","pretty_name": "talon","title": "the Blade\'s Shadow","champkey": "Talon","img": "/assets/img/lol/champion_icons/91.png"},"92": {"id": "92","name": "Riven","pretty_name": "riven","title": "the Exile","champkey": "Riven","img": "/assets/img/lol/champion_icons/92.png"},"96": {"id": "96","name": "Kog\'Maw","pretty_name": "kogmaw","title": "the Mouth of the Abyss","champkey": "KogMaw","img": "/assets/img/lol/champion_icons/96.png"},"98": {"id": "98","name": "Shen","pretty_name": "shen","title": "Eye of Twilight","champkey": "Shen","img": "/assets/img/lol/champion_icons/98.png"},"99": {"id": "99","name": "Lux","pretty_name": "lux","title": "the Lady of Luminosity","champkey": "Lux","img": "/assets/img/lol/champion_icons/99.png"},"101": {"id": "101","name": "Xerath","pretty_name": "xerath","title": "the Magus Ascendant","champkey": "Xerath","img": "/assets/img/lol/champion_icons/101.png"},"102": {"id": "102","name": "Shyvana","pretty_name": "shyvana","title": "the Half-Dragon","champkey": "Shyvana","img": "/assets/img/lol/champion_icons/102.png"},"103": {"id": "103","name": "Ahri","pretty_name": "ahri","title": "the Nine-Tailed Fox","champkey": "Ahri","img": "/assets/img/lol/champion_icons/103.png"},"104": {"id": "104","name": "Graves","pretty_name": "graves","title": "the Outlaw","champkey": "Graves","img": "/assets/img/lol/champion_icons/104.png"},"105": {"id": "105","name": "Fizz","pretty_name": "fizz","title": "the Tidal Trickster","champkey": "Fizz","img": "/assets/img/lol/champion_icons/105.png"},"106": {"id": "106","name": "Volibear","pretty_name": "volibear","title": "the Thunder\'s Roar","champkey": "Volibear","img": "/assets/img/lol/champion_icons/106.png"},"107": {"id": "107","name": "Rengar","pretty_name": "rengar","title": "the Pridestalker","champkey": "Rengar","img": "/assets/img/lol/champion_icons/107.png"},"110": {"id": "110","name": "Varus","pretty_name": "varus","title": "the Arrow of Retribution","champkey": "Varus","img": "/assets/img/lol/champion_icons/110.png"},"111": {"id": "111","name": "Nautilus","pretty_name": "nautilus","title": "the Titan of the Depths","champkey": "Nautilus","img": "/assets/img/lol/champion_icons/111.png"},"112": {"id": "112","name": "Viktor","pretty_name": "viktor","title": "the Machine Herald","champkey": "Viktor","img": "/assets/img/lol/champion_icons/112.png"},"113": {"id": "113","name": "Sejuani","pretty_name": "sejuani","title": "the Winter\'s Wrath","champkey": "Sejuani","img": "/assets/img/lol/champion_icons/113.png"},"114": {"id": "114","name": "Fiora","pretty_name": "fiora","title": "the Grand Duelist","champkey": "Fiora","img": "/assets/img/lol/champion_icons/114.png"},"115": {"id": "115","name": "Ziggs","pretty_name": "ziggs","title": "the Hexplosives Expert","champkey": "Ziggs","img": "/assets/img/lol/champion_icons/115.png"},"117": {"id": "117","name": "Lulu","pretty_name": "lulu","title": "the Fae Sorceress","champkey": "Lulu","img": "/assets/img/lol/champion_icons/117.png"},"119": {"id": "119","name": "Draven","pretty_name": "draven","title": "the Glorious Executioner","champkey": "Draven","img": "/assets/img/lol/champion_icons/119.png"},"120": {"id": "120","name": "Hecarim","pretty_name": "hecarim","title": "the Shadow of War","champkey": "Hecarim","img": "/assets/img/lol/champion_icons/120.png"},"121": {"id": "121","name": "Kha\'Zix","pretty_name": "kha\'zix","title": "the Voidreaver","champkey": "Khazix","img": "/assets/img/lol/champion_icons/121.png"},"122": {"id": "122","name": "Darius","pretty_name": "darius","title": "the Hand of Noxus","champkey": "Darius","img": "/assets/img/lol/champion_icons/122.png"},"126": {"id": "126","name": "Jayce","pretty_name": "jayce","title": "the Defender of Tomorrow","champkey": "Jayce","img": "/assets/img/lol/champion_icons/126.png"},"127": {"id": "127","name": "Lissandra","pretty_name": "lissandra","title": "the Ice Witch","champkey": "Lissandra","img": "/assets/img/lol/champion_icons/127.png"},"131": {"id": "131","name": "Diana","pretty_name": "diana","title": "Scorn of the Moon","champkey": "Diana","img": "/assets/img/lol/champion_icons/131.png"},"133": {"id": "133","name": "Quinn","pretty_name": "quinn","title": "Demacia\'s Wings","champkey": "Quinn","img": "/assets/img/lol/champion_icons/133.png"},"134": {"id": "134","name": "Syndra","pretty_name": "syndra","title": "the Dark Sovereign","champkey": "Syndra","img": "/assets/img/lol/champion_icons/134.png"},"136": {"id": "136","name": "Aurelion Sol","pretty_name": "aurelionsol","title": "The Star Forger","champkey": "AurelionSol","img": "/assets/img/lol/champion_icons/136.png"},"143": {"id": "143","name": "Zyra","pretty_name": "zyra","title": "Rise of the Thorns","champkey": "Zyra","img": "/assets/img/lol/champion_icons/143.png"},"150": {"id": "150","name": "Gnar","pretty_name": "gnar","title": "the Missing Link","champkey": "Gnar","img": "/assets/img/lol/champion_icons/150.png"},"154": {"id": "154","name": "Zac","pretty_name": "zac","title": "the Secret Weapon","champkey": "Zac","img": "/assets/img/lol/champion_icons/154.png"},"157": {"id": "157","name": "Yasuo","pretty_name": "yasuo","title": "the Unforgiven","champkey": "Yasuo","img": "/assets/img/lol/champion_icons/157.png"},"161": {"id": "161","name": "Vel\'Koz","pretty_name": "vel\'koz","title": "the Eye of the Void","champkey": "Velkoz","img": "/assets/img/lol/champion_icons/161.png"},"163": {"id": "163","name": "Taliyah","pretty_name": "taliyah","title": "the Stoneweaver","champkey": "Taliyah","img": "/assets/img/lol/champion_icons/163.png"},"201": {"id": "201","name": "Braum","pretty_name": "braum","title": "the Heart of the Freljord","champkey": "Braum","img": "/assets/img/lol/champion_icons/201.png"},"202": {"id": "202","name": "Jhin","pretty_name": "jhin","title": "the Virtuoso","champkey": "Jhin","img": "/assets/img/lol/champion_icons/202.png"},"203": {"id": "203","name": "Kindred","pretty_name": "kindred","title": "The Eternal Hunters","champkey": "Kindred","img": "/assets/img/lol/champion_icons/203.png"},"222": {"id": "222","name": "Jinx","pretty_name": "jinx","title": "the Loose Cannon","champkey": "Jinx","img": "/assets/img/lol/champion_icons/222.png"},"223": {"id": "223","name": "Tahm Kench","pretty_name": "tahmkench","title": "the River King","champkey": "TahmKench","img": "/assets/img/lol/champion_icons/223.png"},"236": {"id": "236","name": "Lucian","pretty_name": "lucian","title": "the Purifier","champkey": "Lucian","img": "/assets/img/lol/champion_icons/236.png"},"238": {"id": "238","name": "Zed","pretty_name": "zed","title": "the Master of Shadows","champkey": "Zed","img": "/assets/img/lol/champion_icons/238.png"},"240": {"id": "240","name": "Kled","pretty_name": "kled","title": "the Cantankerous Cavalier","champkey": "Kled","img": "/assets/img/lol/champion_icons/240.png"},"245": {"id": "245","name": "Ekko","pretty_name": "ekko","title": "the Boy Who Shattered Time","champkey": "Ekko","img": "/assets/img/lol/champion_icons/245.png"},"254": {"id": "254","name": "Vi","pretty_name": "vi","title": "the Piltover Enforcer","champkey": "Vi","img": "/assets/img/lol/champion_icons/254.png"},"266": {"id": "266","name": "Aatrox","pretty_name": "aatrox","title": "the Darkin Blade","champkey": "Aatrox","img": "/assets/img/lol/champion_icons/266.png"},"267": {"id": "267","name": "Nami","pretty_name": "nami","title": "the Tidecaller","champkey": "Nami","img": "/assets/img/lol/champion_icons/267.png"},"268": {"id": "268","name": "Azir","pretty_name": "azir","title": "the Emperor of the Sands","champkey": "Azir","img": "/assets/img/lol/champion_icons/268.png"},"412": {"id": "412","name": "Thresh","pretty_name": "thresh","title": "the Chain Warden","champkey": "Thresh","img": "/assets/img/lol/champion_icons/412.png"},"420": {"id": "420","name": "Illaoi","pretty_name": "illaoi","title": "the Kraken Priestess","champkey": "Illaoi","img": "/assets/img/lol/champion_icons/420.png"},"421": {"id": "421","name": "Rek\'sai","pretty_name": "rek\'sai","title": "the Void Burrower","champkey": "RekSai","img": "/assets/img/lol/champion_icons/421.png"},"429": {"id": "429","name": "Kalista","pretty_name": "kalista","title": "the Spear of Vengeance","champkey": "Kalista","img": "/assets/img/lol/champion_icons/429.png"},"432": {"id": "432","name": "Bard","pretty_name": "bard","title": "the Wandering Caretaker","champkey": "Bard","img": "/assets/img/lol/champion_icons/432.png"}}}';
-
 // start sqlite
 DatabaseHandler.init(config.sqliteDb);
 
+// snoowrap setup
 const r = new snoowrap({
     user_agent: config.user_agent,
     client_id: config.client_id,
@@ -20,11 +19,74 @@ const r = new snoowrap({
     password: config.password
 });
 
+// summoner lookup callback function
+function summonerApiCallback(body) {
+    // attempt to parse data
+    try {
+        var result = JSON.parse(body);
+    } catch (err) {
+    }
+
+    // get information
+    var topChampions = {},
+        summonerMastery = false,
+        summonerInfo = false;
+    if (
+        result.summoner_mastery &&
+        result.summoner_mastery.mastery_data.length > 0 &&
+        result.summoner_info
+    ) {
+        // store data
+        topChampions = result.summoner_mastery.mastery_data.slice(0, 5);
+        summonerInfo = result.summoner_info;
+        summonerMastery = result.summoner_mastery;
+
+        // create markup template
+        var markupCode = ResponseTemplate(summonerInfo, summonerMastery, topChampions);
+        console.log(markupCode);
+    }
+
+    // this ID is new, insert into the database
+    // DatabaseHandler.insert_response(message.id, markupCode);
+};
+
+//*
+
+// mark a array of ids as read
+function markRead(ids) {
+    var idArray = [];
+
+    // loop through ids
+    ids.map((message, index) => {
+        // push to array
+        idArray.push(message.id);
+    });
+
+    // mark all ids as read
+    // r.getMessage(idArray).markAsRead();
+
+    console.log('Marked messages as read', idArray);
+}
+
+// get all unreadMessages
 function checkMessages() {
+    // a list with all messages we have read
+    var readMessageIds = [];
+
+    // get unread messages
     r.get_unread_messages().then((messages) => {
+        if (!messages) {
+            console.log('Failed to load messages');
+            return;
+        }
+
         console.log('New unread messages: ' + messages.length);
 
+        // loop through messages
         messages.map((message, index) => {
+            // add id to list
+            readMessageIds.push(message.id);
+
             // we only check comments
             if (message.was_comment) {
                 let messageId = message.id;
@@ -35,45 +97,15 @@ function checkMessages() {
 
                         // parse all users from the comment
                         var resultingUsers = Utils.parseBody(message.body);
-                        console.log(resultingUsers);
+                        // set the max amount of users
+                        resultingUsers = resultingUsers.slice(0, config.user_limit);
+                        console.log('Found summoners: ', resultingUsers);
 
                         // loop through found users
                         for (var userKey in resultingUsers) {
                             RequestHandler.request(
                                 config.api_base + '/summoner/' + resultingUsers[userKey]['summoner'] + '/' + resultingUsers[userKey]['server'],
-                                (body) => {
-                                    // attempt to parse data
-                                    try {
-                                        var result = JSON.parse(body);
-                                    } catch (err) {
-                                    }
-
-                                    // get information
-                                    var topChampions = {},
-                                        summonerMastery = false,
-                                        summonerInfo = false;
-                                    if (
-                                        result.summoner_mastery &&
-                                        result.summoner_mastery.mastery_data.length > 0 &&
-                                        result.summoner_info
-                                    ) {
-                                        // store data
-                                        topChampions = result.summoner_mastery.mastery_data.slice(0, 5);
-                                        summonerInfo = result.summoner_info;
-                                        summonerMastery = result.summoner_mastery;
-
-                                        // create markup template
-                                        var markupCode = ResponseTemplate(summonerInfo, summonerMastery, topChampions);
-                                    }
-
-                                    // attempt to respond
-                                    try{
-                                        message.reply(markupCode);
-                                    }catch(err){
-                                        console.log(err);
-                                    }
-
-                                },
+                                summonerApiCallback,
                                 (err, body) => {
                                     console.log('error');
                                     console.log(err, body);
@@ -81,24 +113,23 @@ function checkMessages() {
                             );
                         }
 
-                        // this ID is new
+                        // this ID is new and has been checked
                         DatabaseHandler.insert_id(check_result.id);
                     } else {
                         console.log('Id Exists: ' + check_result.id);
                     }
+
+                    // mark as read
+                    console.log('Mark as read', message.id);
                 });
             }
-
-            // Always mark message as read
-            // r.get_message(message.id).then((res) => {
-            //     console.log(res);
-            // });
-
-            // var messagetest = r.get_message(message.id);
-            // messagetest.mark_as_read();
         });
+
+        // mark all messages as read
+        markRead(readMessageIds);
     });
 }
+
 checkMessages();
 
-/* */
+/**/

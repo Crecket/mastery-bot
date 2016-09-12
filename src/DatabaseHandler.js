@@ -9,7 +9,7 @@ module.exports = {
         this.db = new sqlite3.Database(sqlite_location);
         // this.db.run("CREATE TABLE IF NOT EXISTS submissions(id TEXT PRIMARY KEY NOT NULL)");
         this.db.run("CREATE TABLE IF NOT EXISTS comments(id TEXT PRIMARY KEY, status INTEGER)");
-        this.db.run("CREATE TABLE IF NOT EXISTS response(id TEXT PRIMARY KEY, status INTEGER)");
+        this.db.run("CREATE TABLE IF NOT EXISTS response(id TEXT PRIMARY KEY, markup TEXT, sent INTEGER)");
     },
 
     // Close database connection
@@ -41,11 +41,13 @@ module.exports = {
 
     // Check if a reddit submission id is already stored
     insert_id: (id) => {
+        console.log('Inserting ID into comment', id);
         this.db.run("INSERT INTO comments (id, status) VALUES (?, 0)", [id]);
     },
 
     // Check if a reddit submission id is already stored
-    insert_response: (id) => {
-        this.db.run("INSERT INTO comments (id, status) VALUES (?, 0)", [id]);
+    insert_response: (id, markup) => {
+        console.log('Inserting ID into response', id);
+        this.db.run("INSERT INTO response (id, markup, sent) VALUES (?, ?, 0)", [id, markup]);
     }
 };
