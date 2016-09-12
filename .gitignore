@@ -1,5 +1,4 @@
-/src/config.js
+/src/config/config.js
 /node_modules
-#Default database exclude
-/database.db
-/npm-debug.log
+/src/config/database.db
+/npm-debug.log.*

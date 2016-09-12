@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#142F4C">
+    <meta name="msapplication-navbutton-color" content="#142F4C">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#142F4C">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="description" content="" itemprop="about">-->
+    <!--<meta name="keywords" content="" itemprop="keywords">-->
+    <meta name="author" content="Gregory Goijaerts (crecketgaming@gmail.com)" itemprop="author">
+    <link rel="icon" type="image/png" href="https://www.masterypoints.com/assets/img/favicon.png">
+    <meta itemprop='name' content="MasteryPoints">
+    <meta itemprop='alternateName' content="MasteryPts">
+    <link rel="canonical" href="https://www.masterypoints.com" itemprop="url">
+    <title>MP | Mastery Bot Results</title>
+    <link href="//fonts.googleapis.com/css?family=Roboto:100,400" rel="stylesheet">
+
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+    <script type="text/javascript">
+        window.cookieconsent_options = {
+            "message": "This website uses cookies to ensure you get the best experience on our website",
+            "dismiss": "Got it!",
+            "learnMore": "More info",
+            "link": null
+        };
+    </script>
+
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+</head>
+<body>
+
+<div class="container">
+    <table class="responsive-table highlight striped">
+        <tbody id="comments">
+        </tbody>
+    </table>
+</div>
+
+<!--<ul id="comments"></ul>-->
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script>
+    var socket = io();
+    socket.on('new comment', function (data) {
+        var text = data.input.replace("\n", "<br>");
+        console.log(data);
+        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' + new Date().toLocaleString() + '</strong>: <br>' + text + '</td></tr>');
+    });
+</script>
+</body>
+</html>

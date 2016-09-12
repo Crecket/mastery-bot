@@ -1,10 +1,13 @@
 var config = {};
 
 // save location for sqlite
-config.sqliteDb = "./database.db";
+config.sqliteDb = "./src/config/database.db";
 
 // the amount of users we can lookup per comment
 config.user_limit = 1;
+
+// http/socket port
+config.port = 8080;
 
 // api lookup and useragent to use
 config.api_base = "https://www.masterypoints.com/api/v1.0";
