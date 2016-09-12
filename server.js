@@ -7,6 +7,58 @@ var RequestHandler = require('./src/RequestHandler.js');
 var ResponseTemplate = require('./src/ResponseTemplate.js');
 var Utils = require('./src/Utils.js');
 
+// server list
+var servers = true;
+var champions = true;
+
+function isReady() {
+    if (servers === true) {
+        servers = false;
+        console.log('Loading servers');
+        RequestHandler.request(
+            config.api_base + '/static/servers',
+            (result) => {
+                var serversJson = JSON.parse(result);
+                if (serversJson.servers) {
+                    servers = serversJson.servers;
+                }
+                isReady();
+            },
+            (err, body) => {
+                servers = false;
+                console.log('error');
+                console.log(err, body);
+            }
+        );
+    }
+    if (champions === true) {
+        champions = false;
+        console.log('Loading champions');
+        RequestHandler.request(
+            config.api_base + '/static/champions',
+            (result) => {
+                var championsJson = JSON.parse(result);
+                if (championsJson.champions) {
+                    champions = championsJson.champions;
+                }
+                isReady();
+            },
+            (err, body) => {
+                champions = false;
+                console.log('error');
+                console.log(err, body);
+            }
+        );
+    }
+
+    // true means it hasn't been checked
+    // false means it failed
+    if (champions !== true && champions !== false && servers !== true && servers !== false) {
+        // we have all requirements
+        checkMessages();
+    }
+}
+
 // start sqlite
 DatabaseHandler.init(config.sqliteDb);
 
@@ -20,7 +72,7 @@ const r = new snoowrap({
 });
 
 // summoner lookup callback function
-function summonerApiCallback(body) {
+function summonerApiCallback(message, body) {
     // attempt to parse data
     try {
         var result = JSON.parse(body);
@@ -42,34 +94,39 @@ function summonerApiCallback(body) {
         summonerMastery = result.summoner_mastery;
 
         // create markup template
-        var markupCode = ResponseTemplate(summonerInfo, summonerMastery, topChampions);
+        var markupCode = ResponseTemplate(summonerInfo, summonerMastery, topChampions, champions);
         console.log(markupCode);
     }
 
     // this ID is new, insert into the database
-    // DatabaseHandler.insert_response(message.id, markupCode);
+    DatabaseHandler.insert_response(message.id, markupCode);
 };
 
 //*
 
-// mark a array of ids as read
-function markRead(ids) {
-    var idArray = [];
-
-    // loop through ids
-    ids.map((message, index) => {
-        // push to array
-        idArray.push(message.id);
+// mark a array of messages as read
+function markRead(messages) {
+    var ids = [];
+    messages.map(function (value) {
+        ids.push(value.id);
     });
 
-    // mark all ids as read
-    // r.getMessage(idArray).markAsRead();
+    console.log(messages);
 
-    console.log('Marked messages as read', idArray);
+    // mark all ids as read
+    // var messages = r.getMessage(ids);
+    // var mark = messages.markAsRead();
+    // mark.then(function (test) {
+    //     console.log(test);
+    // });
+    //
+    // console.log('Marked messages as read', ids);
 }
 
 // get all unreadMessages
 function checkMessages() {
+    console.log('=============================\nCheck messages');
+
     // a list with all messages we have read
     var readMessageIds = [];
 
@@ -85,7 +142,7 @@ function checkMessages() {
         // loop through messages
         messages.map((message, index) => {
             // add id to list
-            readMessageIds.push(message.id);
+            readMessageIds.push(message);
 
             // we only check comments
             if (message.was_comment) {
@@ -97,6 +154,7 @@ function checkMessages() {
 
                         // parse all users from the comment
                         var resultingUsers = Utils.parseBody(message.body);
+
                         // set the max amount of users
                         resultingUsers = resultingUsers.slice(0, config.user_limit);
                         console.log('Found summoners: ', resultingUsers);
@@ -105,7 +163,9 @@ function checkMessages() {
                         for (var userKey in resultingUsers) {
                             RequestHandler.request(
                                 config.api_base + '/summoner/' + resultingUsers[userKey]['summoner'] + '/' + resultingUsers[userKey]['server'],
-                                summonerApiCallback,
+                                (body) => {
+                                    summonerApiCallback(message, body);
+                                },
                                 (err, body) => {
                                     console.log('error');
                                     console.log(err, body);
@@ -130,6 +190,7 @@ function checkMessages() {
     });
 }
 
-checkMessages();
-
+// check if we're ready to go and load requirements
+isReady();
+setInterval(isReady, 60000);
 /**/

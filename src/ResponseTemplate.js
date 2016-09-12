@@ -1,6 +1,4 @@
-var champions = require('./ChampionData.js');
-
-module.exports = function (summoner_info, summoner_mastery, topChampions) {
+module.exports = function (summoner_info, summoner_mastery, topChampions, champions) {
     // header
     var result = "___\nMasterypoints information for [**" +
         summoner_info.name + "** on **" + summoner_info.server.toUpperCase() + "**]" +
