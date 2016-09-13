@@ -113,8 +113,9 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
 
                                 // loop through found users
                                 for (var userKey in resultingUsers) {
-                                    RequestHandler.request(
-                                        config.api_base + '/summoner/' + resultingUsers[userKey]['summoner'] + '/' + resultingUsers[userKey]['server'],
+                                    var targetUrl = config.api_base + '/summoner/' + encodeURIComponent(resultingUsers[userKey]['summoner']).trim() + '/' + resultingUsers[userKey]['server'] + '?debug=1231423123';
+                                     RequestHandler.request(
+                                        targetUrl,
                                         (body) => {
                                             Fetcher.summonerApiCallback(message, body);
                                         },

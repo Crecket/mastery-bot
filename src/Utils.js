@@ -1,17 +1,13 @@
+const XRegExp = require('xregexp');
+
 module.exports = {
     parseBody: (string) => {
-        var found_matches = [];
         var result_summoners = [];
-        var regexPattern = /(?:(\/u\/mastery_bot).{1,25}[a-zA-Z0-9] \/ [a-zA-Z]{2,4})/g;
-        var m;
 
-        // do regex check
-        do {
-            m = regexPattern.exec(string);
-            if (m) {
-                found_matches.push(m[0])
-            }
-        } while (m);
+        // match all unicode chars in combination with the mastery tag and a server
+        var found_matches = XRegExp.matchChain(string, [
+            {regex: /(?:(\/u\/mastery_bot).{1,17}[\x00-\x7Fa-zA-Z0-g _\\.!/]\/ [a-zA-Z]{2,4})/g},
+        ]);
 
         // loop through regex matches
         for (var matchKey in found_matches) {

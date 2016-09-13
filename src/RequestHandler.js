@@ -1,5 +1,5 @@
 var request = require('request');
-
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 module.exports = {
     request: function (url, callback, callbackErr, data) {
         if (!data) {

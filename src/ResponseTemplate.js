@@ -29,5 +29,10 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
 
     // credits
     result += "___\nData by [www.masterypoints.com](https://www.masterypoints.com)\n___";
+
+    // console.log("\n\n");
+    // console.log(result);
+    // console.log("\n\n");
+
     return result;
 }
