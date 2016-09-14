@@ -6,9 +6,9 @@ var snoowrap = require('snoowrap');
 var config = require('./src/config/config.js');
 
 var RequestHandler = require('./src/RequestHandler.js');
-var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
-var DatabaseHandler = require('./src/DatabaseHandler.js')(ExpressSocket);
-var Logging = require('./src/Logging')(ExpressSocket);
+// var  = require('./src/.js')(config.port);
+var DatabaseHandler = require('./src/DatabaseHandler.js')();
+var Logging = require('./src/Logging')();
 var Utils = require('./src/Utils.js');
 
 // server list
@@ -28,8 +28,8 @@ const r = new snoowrap({
 });
 
 // helper objects
-var Responder = require('./src/Responder')(r, DatabaseHandler, ExpressSocket);
-var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, ExpressSocket, champions, servers);
+var Responder = require('./src/Responder')(r, DatabaseHandler );
+var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, champions, servers);
 
 // check if we have the servers and champions
 function isReady() {
