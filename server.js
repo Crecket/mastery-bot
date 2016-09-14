@@ -4,12 +4,14 @@ var chalk = require('chalk');
 var snoowrap = require('snoowrap');
 
 var config = require('./src/config/config.js');
-
 var RequestHandler = require('./src/RequestHandler.js');
 // var  = require('./src/.js')(config.port);
 var DatabaseHandler = require('./src/DatabaseHandler.js')();
 var Logging = require('./src/Logging')();
 var Utils = require('./src/Utils.js');
+
+var foundUsers = 0,
+    sentResponses = 0;
 
 // server list
 var servers = true;
@@ -24,7 +26,10 @@ const r = new snoowrap({
     client_id: config.client_id,
     client_secret: config.client_secret,
     username: config.username,
-    password: config.password
+    password: config.password,
+
+    // don't continue api queue if rate limit reached
+    continueAfterRatelimitError: false
 });
 
 // helper objects
@@ -35,7 +40,7 @@ var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, champions, servers);
 function isReady() {
     if (servers === true) {
         servers = false;
-        Logging('cyan', 'Loading servers');
+        Logging('cyan', 'Loading servers\n');
         RequestHandler.request(
             config.api_base + '/static/servers',
             (result) => {
@@ -55,7 +60,7 @@ function isReady() {
     }
     if (champions === true) {
         champions = false;
-        Logging('cyan','Loading champions');
+        Logging('cyan', 'Loading champions\n');
         RequestHandler.request(
             config.api_base + '/static/champions',
             (result) => {
@@ -74,14 +79,25 @@ function isReady() {
         );
     }
 
-    // true means it hasn't been checked
-    // false means it failed
+    // champions|server have to be a object
+    // databaseready has to be true
     if (champions !== true && champions !== false && servers !== true && servers !== false) {
-        // we have all requirements
+        // we have all requirements, run anything that needs the champions or server list
         Fetcher.checkMessages();
     }
 }
 
-// check if we're ready to go and load requirements
-isReady();
-setInterval(isReady, 30 * 1000 * 1);
+setTimeout(()=> {
+    // wait a bit for everything to be online
+    isReady();
+    // Responder.getResponses();
+}, 500);
+
+// timer
+setInterval(()=> {
+    isReady();
+    // Responder.getResponses();
+}, 4 * 1000);
+
+
+

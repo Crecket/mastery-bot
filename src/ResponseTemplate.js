@@ -12,7 +12,7 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
     result += "Total mastery points |" + summoner_mastery.total_points + "\n";
     result += "Total mastery level |" + summoner_mastery.total_mastery_level + "\n";
     result += "Champions lvl 5 or higher |" + summoner_mastery.total_mastered + "\n";
-    result += "Champions player |" + summoner_mastery.total_champions + "\n";
+    result += "Champions played |" + summoner_mastery.total_champions + "\n";
     result += "Last update |" + summoner_mastery.last_mastery_update + " ^^(gmt+2)\n\n";
 
     // top champions list
@@ -20,7 +20,7 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
         "Champions | Points | Masterylevel\n" +
         "---------|----------|----------\n";
     for (var key in topChampions) {
-        result += ("[](#c-" + champions[topChampions[key]['champion']]['name'] + ")" + // icon
+        result += ("[](#c-" + champions[topChampions[key]['champion']]['pretty_name'] + ")" + // icon
         "[" + champions[topChampions[key]['champion']]['name'] + "]" +
         "(https://www.masterypoints.com/highscores/champion/" + champions[topChampions[key]['champion']]['name'] + ")|" +
         topChampions[key]['points'] + "|" +
@@ -28,11 +28,7 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
     }
 
     // credits
-    result += "___\nData by [www.masterypoints.com](https://www.masterypoints.com)\n___";
-
-    // console.log("\n\n");
-    // console.log(result);
-    // console.log("\n\n");
+    result += "___\n^(I am a bot, beep boop. Data is from https://www.masterypoints.com)\n___";
 
     return result;
 }

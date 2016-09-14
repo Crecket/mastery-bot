@@ -7,7 +7,7 @@ var config = require('./config/config.js');
 var chalk = require('chalk');
 
 module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers) {
-    var Logging = require('./Logging')(ExpressSocket);
+    var Logging = require('./Logging.js')(ExpressSocket);
 
     //*
     var Fetcher = {
@@ -60,7 +60,7 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
 
             // check if we have atleast 1 message
             if (ids.length > 0) {
-                Logging('cyan', 'Marked messages as read', ids);
+                Logging('green', 'Marked messages as read', ids);
                 r.markMessagesAsRead(messages);
             }
         },
@@ -75,7 +75,7 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
 
         // get all unreadMessages
         checkMessages: () => {
-            Logging('green', 'Checking messages');
+            Logging('bgCyan', 'Checking messages\r');
 
             // get unread messages
             r.getUnreadMessages().then((messages) => {
@@ -84,7 +84,7 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
                     return;
                 }
 
-                Logging(false, 'New unread messages: ' + messages.length);
+                Logging('cyan', 'New unread messages: ' + messages.length +'\r' );
 
                 // loop through messages
                 messages.map((message, index) => {
@@ -109,12 +109,13 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
 
                                 // set the max amount of users
                                 resultingUsers = resultingUsers.slice(0, config.user_limit);
-                                Logging(false, 'Found summoners: ', resultingUsers);
+                                Logging('cyan', 'Found summoners: ');
+                                Logging(false, resultingUsers);
 
                                 // loop through found users
                                 for (var userKey in resultingUsers) {
                                     var targetUrl = config.api_base + '/summoner/' + encodeURIComponent(resultingUsers[userKey]['summoner']).trim() + '/' + resultingUsers[userKey]['server'] + '?debug=1231423123';
-                                     RequestHandler.request(
+                                    RequestHandler.request(
                                         targetUrl,
                                         (body) => {
                                             Fetcher.summonerApiCallback(message, body);
@@ -129,17 +130,17 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
                                 // this ID is new and has been checked
                                 DatabaseHandler.insert_id(check_result.id);
                             } else {
-                                Logging(false, 'Id Exists: ' + check_result.id);
+                                Logging('orange', 'Id Exists: ' + check_result.id);
                             }
-
-                            // mark as read
-                            Logging(false, 'Mark as read', message.id);
                         });
                     }
                 });
 
                 // mark all messages as read
                 Fetcher.markRead(messages);
+            }).catch(err => {
+                Logging('red', 'Failed to get unread messages');
+                Logging('red', err);
             });
         }
     }

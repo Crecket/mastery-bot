@@ -18,7 +18,7 @@ module.exports = function (port) {
     });
 
     http.listen(port, function () {
-        console.log(chalk.green('Http and sockets listening on *:' + port));
+        console.log(chalk.bgBlue('Http and sockets listening on *:' + port));
     });
 
     return io;

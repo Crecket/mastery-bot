@@ -1,4 +1,5 @@
 /src/config/config.js
 /node_modules
-/src/config/database.db
+/database.db
 /npm-debug.log.*
+/bower_components

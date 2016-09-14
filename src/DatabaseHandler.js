@@ -11,7 +11,7 @@ module.exports = function (ExpressSocket) {
         init: (sqlite_location) => {
             this.db = new sqlite3.Database(sqlite_location);
             // this.db.run("CREATE TABLE IF NOT EXISTS submissions(id TEXT PRIMARY KEY NOT NULL)");
-            this.db.run("CREATE TABLE IF NOT EXISTS comments(id TEXT PRIMARY KEY, status INTEGER)");
+            this.db.run("CREATE TABLE IF NOT EXISTS comments(id TEXT PRIMARY KEY)");
             this.db.run("CREATE TABLE IF NOT EXISTS response(id TEXT PRIMARY KEY, markup TEXT, sent INTEGER)");
         },
 
@@ -44,14 +44,36 @@ module.exports = function (ExpressSocket) {
 
         // Check if a reddit submission id is already stored
         insert_id: (id) => {
-            Logging(false, 'Inserting ID into comment', id);
-            this.db.run("INSERT INTO comments (id, status) VALUES (?, 0)", [id]);
+            Logging('cyan', 'Inserting ID into comment', id);
+            this.db.run("INSERT INTO comments (id) VALUES (?)", [id]);
         },
 
         // Check if a reddit submission id is already stored
         insert_response: (id, markup) => {
-            Logging(false, 'Inserting ID into response', id);
+            Logging('cyan', 'Inserting ID into response', id);
             this.db.run("INSERT INTO response (id, markup, sent) VALUES (?, ?, 0)", [id, markup]);
+        },
+
+        // Get all new responses which havn't been sent yet
+        get_responses: (callback) => {
+            try {
+                this.db.all("SELECT * FROM response WHERE sent = 0 LIMIT 5", (err, rows) => {
+                    if (err) {
+                        Logging('red', err);
+                        return;
+                    }
+
+                    callback(rows);
+                });
+            } catch (ex) {
+                return callback({});
+            }
+
+        },
+
+        set_response_sent: (id) => {
+            // attempt to update the sent status on a response
+            this.db.run("UPDATE response SET sent = 1 WHERE id = ?", [id]);
         }
     };
 
