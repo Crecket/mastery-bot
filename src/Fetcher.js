@@ -2,12 +2,12 @@
 
 var ResponseTemplate = require('./ResponseTemplate.js');
 var RequestHandler = require('./RequestHandler.js');
-var Utils = require('./Utils.js');
+var Parser = require('./Parser.js');
 var config = require('./config/config.js');
 var chalk = require('chalk');
 
 module.exports = function (r, DatabaseHandler, staticData) {
-    var Logging = require('./Logging.js');
+    var Logging = require('./Logging.js')();
     var champions = staticData.champions;
     var servers = staticData.servers;
 
@@ -26,8 +26,9 @@ module.exports = function (r, DatabaseHandler, staticData) {
         // summoner lookup callback function
         summonerApiCallback: (message, body) => {
             // attempt to parse data
+            var result = false;
             try {
-                var result = JSON.parse(body);
+                result = JSON.parse(body);
             } catch (err) {
             }
 
@@ -36,6 +37,7 @@ module.exports = function (r, DatabaseHandler, staticData) {
                 summonerMastery = false,
                 summonerInfo = false;
             if (
+                result &&
                 result.summoner_mastery &&
                 result.summoner_mastery.mastery_data.length > 0 &&
                 result.summoner_info
@@ -77,7 +79,7 @@ module.exports = function (r, DatabaseHandler, staticData) {
 
         // get all unreadMessages
         checkMessages: () => {
-            Logging('bgCyan', 'Checking messages\r');
+            Logging('bgCyan', 'Checking messages');
 
             // get unread messages
             r.getUnreadMessages().then((messages) => {
@@ -86,7 +88,7 @@ module.exports = function (r, DatabaseHandler, staticData) {
                     return;
                 }
 
-                Logging('cyan', 'New unread messages: ' + messages.length +'\r' );
+                Logging('cyan', 'New unread messages: ' + messages.length +'' );
 
                 // loop through messages
                 messages.map((message, index) => {
@@ -100,7 +102,7 @@ module.exports = function (r, DatabaseHandler, staticData) {
                             if (check_result.found === false) {
 
                                 // parse all users from the comment
-                                var resultingUsers = Utils.parseBody(message.body);
+                                var resultingUsers = Parser.parseBody(message.body);
 
                                 resultingUsers.map((resultingUser, userIndex) => {
                                     if (!Fetcher.serverValid(resultingUser['server'])) {

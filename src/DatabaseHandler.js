@@ -2,7 +2,7 @@
 var sqlite3 = require("sqlite3").verbose();
 
 module.exports = function () {
-    var Logging = require('./Logging');
+    var Logging = require('./Logging')();
 
     var DatabaseHandler = {
         db: false,

@@ -8,7 +8,6 @@ var RequestHandler = require('./src/RequestHandler.js');
 var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
 var DatabaseHandler = require('./src/DatabaseHandler.js')();
 var Logging = require('./src/Logging')();
-var Utils = require('./src/Utils.js');
 
 var genericInfo = {
     // most recent username and server
@@ -45,17 +44,14 @@ const r = new snoowrap({
 });
 
 // helper objects
-var Responder = require('./src/Responder')(r, DatabaseHandler, (amount) => {
-    // sent a response succesfuly
-    genericInfo.sentResponses += amount;
-});
+var Responder = require('./src/Responder')(r, DatabaseHandler);
 var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions});
 
 // check if we have the servers and champions
 function isReady() {
     if (servers === true) {
         servers = false;
-        Logging('cyan', 'Loading servers\n');
+        Logging('cyan', 'Loading servers');
         RequestHandler.request(
             config.api_base + '/static/servers',
             (result) => {
@@ -75,7 +71,7 @@ function isReady() {
     }
     if (champions === true) {
         champions = false;
-        Logging('cyan', 'Loading champions\n');
+        Logging('cyan', 'Loading champions');
         RequestHandler.request(
             config.api_base + '/static/champions',
             (result) => {
@@ -105,14 +101,14 @@ function isReady() {
 setTimeout(()=> {
     // wait a bit for everything to be online
     isReady();
-    // Responder.getResponses();
+    Responder.getResponses();
 }, 500);
 
 // timer
 setInterval(()=> {
     isReady();
-    // Responder.getResponses();
-}, 4 * 1000);
+    Responder.getResponses();
+}, 15 * 1000);
 
 
 
