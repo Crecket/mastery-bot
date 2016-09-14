@@ -85,11 +85,16 @@ function isReady() {
     }
 }
 
-setTimeout(()=>{
+setTimeout(()=> {
+    // wait a bit for everything to be online
     isReady();
     Responder.getResponses();
 }, 500);
-setInterval(isReady, 30 * 1000 * 1);
+
+setInterval(()=> {
+    isReady();
+    Responder.getResponses();
+}, 30 * 1000);
 
 
 
