@@ -77,22 +77,19 @@ function isReady() {
         );
     }
 
-    // true means it hasn't been checked
-    // false means it failed
+    // champions|server have to be a object
+    // databaseready has to be true
     if (champions !== true && champions !== false && servers !== true && servers !== false) {
         // we have all requirements, run anything that needs the champions or server list
         Fetcher.checkMessages();
     }
 }
 
-// check if we're ready to go and load requirements
-isReady();
+setTimeout(()=>{
+    isReady();
+    Responder.getResponses();
+}, 500);
 setInterval(isReady, 30 * 1000 * 1);
 
-Responder.getResponses();
-setInterval(()=> {
-    // doesn't need any requirements, just run it every 30 seconds
-    Responder.getResponses();
-}, 30 * 1000);
 
 

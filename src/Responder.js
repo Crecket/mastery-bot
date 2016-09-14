@@ -9,8 +9,17 @@ module.exports = function (r, DatabaseHandler, ExpressSocket) {
 
     var Responder = {
         getResponses: () => {
+            Logging('bgCyan', 'Checking response messages');
+
             DatabaseHandler.get_responses((result)=> {
                 var queueActive = true;
+                if (!result) {
+                    Logging('red', 'Failed to load response messages');
+                    return;
+                }
+
+                Logging('cyan', 'New response messages: ' + result.length);
+
 
                 // loop through responses
                 result.map((value, key)=> {

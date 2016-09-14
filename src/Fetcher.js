@@ -61,10 +61,7 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
             // check if we have atleast 1 message
             if (ids.length > 0) {
                 Logging('green', 'Marked messages as read', ids);
-                r.markMessagesAsRead(messages).then.catch(err => {
-                    Logging('red', 'Failed to mark messages as read');
-                    Logging('red', err);
-                });
+                r.markMessagesAsRead(messages);
             }
         },
 
@@ -78,7 +75,7 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
 
         // get all unreadMessages
         checkMessages: () => {
-            Logging('cyan', 'Checking messages');
+            Logging('bgCyan', 'Checking messages');
 
             // get unread messages
             r.getUnreadMessages().then((messages) => {

@@ -20,7 +20,7 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
         "Champions | Points | Masterylevel\n" +
         "---------|----------|----------\n";
     for (var key in topChampions) {
-        result += ("[](#c-" + champions[topChampions[key]['champion']]['name'] + ")" + // icon
+        result += ("[](#c-" + champions[topChampions[key]['champion']]['pretty_name'] + ")" + // icon
         "[" + champions[topChampions[key]['champion']]['name'] + "]" +
         "(https://www.masterypoints.com/highscores/champion/" + champions[topChampions[key]['champion']]['name'] + ")|" +
         topChampions[key]['points'] + "|" +
@@ -28,7 +28,7 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
     }
 
     // credits
-    result += "___\nData by [www.masterypoints.com](https://www.masterypoints.com)\n___";
+    result += "___\n^(I am a bot, beep boop. Data is from https://www.masterypoints.com)\n___";
 
     return result;
 }
