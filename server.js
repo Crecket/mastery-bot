@@ -1,37 +1,47 @@
 "use strict";
 
-var chalk = require('chalk');
+// npm modules
 var snoowrap = require('snoowrap');
 
-var config = require('./src/config/config.js');
-var RequestHandler = require('./src/RequestHandler.js');
-var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
-var DatabaseHandler = require('./src/DatabaseHandler.js')();
-var Logging = require('./src/Logging')();
-
 var genericInfo = {
-    // most recent username and server
-    recentUser: false,
+        // most recent username and server
+        recentUser: 'none',
 
-    // amount of times we request unread messages and how many we received
-    unreadMessagesChecked: 0,
-    unreadMessagesReceived: 0,
+        // amount of times we request unread messages and how many we received
+        timesPolled: 0,
+        timesReceived: 0,
 
-    // amount of users we parsed from messages
-    foundUsers: 0,
+        // amount of users we parsed from messages
+        foundUsers: 0,
 
-    // reply count
-    sentResponses: 0
+        // reply count
+        sentResponses: 0,
+
+        // list of errors
+        errorList: []
+    },
+    // server list storage, is fetched from api
+    servers = true,
+    // champion list storage, is fetched from api
+    champions = true;
+
+// add a error to the error list
+const gotError = (err) => {
+    genericInfo.errorList.push(err);
 };
 
-// server list
-var servers = true;
-var champions = true;
+// custom modules
+var config = require('./src/config/config.js');
+var RequestHandler = require('./src/RequestHandler.js');
+// var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
+var DatabaseHandler = require('./src/DatabaseHandler.js')({gotError: gotError});
+var ConsoleTemplate = require('./src/ConsoleTemplate');
+var Logging = require('./src/Logging')();
 
 // start sqlite
 DatabaseHandler.init(config.sqliteDb);
 
-// snoowrap setup
+// snoowrap setup for reddit api calls
 const r = new snoowrap({
     user_agent: config.user_agent,
     client_id: config.client_id,
@@ -44,8 +54,27 @@ const r = new snoowrap({
 });
 
 // helper objects
-var Responder = require('./src/Responder')(r, DatabaseHandler);
-var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions});
+var Responder = require('./src/Responder')(r, DatabaseHandler,
+    {
+        gotError: gotError,
+        sentResponse: () => {
+            genericInfo.sentResponses += 1;
+        },
+    });
+var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions},
+    {
+        gotError: gotError,
+        hasPolled: () => {
+            genericInfo.timesPolled += 1;
+        },
+        hasReceived: () => {
+            genericInfo.timesReceived += 1;
+        },
+        hasFound: (username) => {
+            genericInfo.recentUser = username;
+        },
+    }
+);
 
 // check if we have the servers and champions
 function isReady() {
@@ -98,17 +127,32 @@ function isReady() {
     }
 }
 
-setTimeout(()=> {
-    // wait a bit for everything to be online
-    isReady();
-    Responder.getResponses();
-}, 500);
+// main poll start function
+function start() {
+    setTimeout(()=> {
+        // wait a bit for everything to be online
+        isReady();
+        Responder.getResponses();
+    }, 500);
 
-// timer
-setInterval(()=> {
-    isReady();
-    Responder.getResponses();
-}, 15 * 1000);
+    // timer
+    setInterval(()=> {
+        isReady();
+        Responder.getResponses();
+    }, config.pollTimer);
 
+}
 
+//*
 
+// start polling
+start();
+
+const showGui = () =>{
+    ConsoleTemplate(genericInfo, config);
+};
+
+// Show the console gui
+showGui();
+setInterval(showGui, 2000);
+//*/

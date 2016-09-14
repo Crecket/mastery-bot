@@ -6,7 +6,7 @@ var Parser = require('./Parser.js');
 var config = require('./config/config.js');
 var chalk = require('chalk');
 
-module.exports = function (r, DatabaseHandler, staticData) {
+module.exports = function (r, DatabaseHandler, staticData, callbacks) {
     var Logging = require('./Logging.js')();
     var champions = staticData.champions;
     var servers = staticData.servers;
@@ -30,6 +30,7 @@ module.exports = function (r, DatabaseHandler, staticData) {
             try {
                 result = JSON.parse(body);
             } catch (err) {
+                callbacks.gotError(err);
             }
 
             // get information
@@ -81,6 +82,9 @@ module.exports = function (r, DatabaseHandler, staticData) {
         checkMessages: () => {
             Logging('bgCyan', 'Checking messages');
 
+            // add a poll count
+            callbacks.hasPolled();
+
             // get unread messages
             r.getUnreadMessages().then((messages) => {
                 if (!messages) {
@@ -97,6 +101,9 @@ module.exports = function (r, DatabaseHandler, staticData) {
                     if (message.was_comment) {
                         let messageId = message.id;
 
+                        // add  valid received count
+                        callbacks.hasReceived();
+
                         // check if we've already done this ID
                         DatabaseHandler.is_checked(messageId, (check_result) => {
                             if (check_result.found === false) {
@@ -108,6 +115,9 @@ module.exports = function (r, DatabaseHandler, staticData) {
                                     if (!Fetcher.serverValid(resultingUser['server'])) {
                                         // server entered is invalid, remove it from the list
                                         delete resultingUsers[userIndex];
+                                    }else{
+                                        // set most recent username
+                                        callbacks.hasFound(resultingUser.summoner);
                                     }
                                 });
 
@@ -125,6 +135,7 @@ module.exports = function (r, DatabaseHandler, staticData) {
                                             Fetcher.summonerApiCallback(message, body);
                                         },
                                         (err, body) => {
+                                            callbacks.gotError(err);
                                             Logging('red', 'Error!');
                                             Logging('red', err);
                                         }
@@ -143,6 +154,7 @@ module.exports = function (r, DatabaseHandler, staticData) {
                 // mark all messages as read
                 Fetcher.markRead(messages);
             }).catch(err => {
+                callbacks.gotError(err);
                 Logging('red', 'Failed to get unread messages');
                 Logging('red', err);
             });

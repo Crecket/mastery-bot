@@ -7,9 +7,10 @@ module.exports = function () {
             res = chalk[color](input);
         }
 
-        console.log(res);
-        // process.stdout.write('\n' + res);
+        // we dont use normal console logs
+        // console.log(res);
 
+        // sockets are disabled
         // ExpressSocket.emit('new comment', {color: color, input: input});
     };
 };

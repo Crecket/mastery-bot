@@ -3,12 +3,12 @@
 var RequestHandler = require('./RequestHandler.js');
 var config = require('./config/config.js');
 
-module.exports = function (r, DatabaseHandler) {
+module.exports = function (r, DatabaseHandler, callbacks) {
     var Logging = require('./Logging')();
 
     var Responder = {
         getResponses: () => {
-            Logging('bgCyan', 'Checking response messages');
+            // Logging('bgCyan', 'Checking response messages');
 
             DatabaseHandler.get_responses((result)=> {
                 var queueActive = true;
@@ -17,7 +17,7 @@ module.exports = function (r, DatabaseHandler) {
                     return;
                 }
 
-                Logging('cyan', 'New response messages: ' + result.length);
+                // Logging('cyan', 'New response messages: ' + result.length);
 
 
                 // loop through responses
@@ -39,7 +39,12 @@ module.exports = function (r, DatabaseHandler) {
                                 Logging('green', 'Replied to ' + value.id);
                                 DatabaseHandler.set_response_sent(value.id);
 
+                                // add sent response callback count
+                                callbacks.sentResponses();
+
                             }).catch(err => {
+                                callbacks.gotError(err);
+
                                 // comment may not exist or some other error was thrown
                                 Logging('red', 'Failed to reply to comment ID: ' + value.id);
 
@@ -53,6 +58,8 @@ module.exports = function (r, DatabaseHandler) {
                             });
                         })
                         .catch(err => {
+                            callbacks.gotError(err);
+
                             // comment may not exist or some other error was thrown
                             Logging('red', 'Failed to fetch comment ID: ' + value.id);
                             Logging('red', err);
