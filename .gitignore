@@ -2,3 +2,4 @@
 /node_modules
 /src/config/database.db
 /npm-debug.log.*
+/bower_components
