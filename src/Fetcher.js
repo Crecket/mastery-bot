@@ -75,7 +75,7 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
 
         // get all unreadMessages
         checkMessages: () => {
-            Logging('bgCyan', 'Checking messages');
+            Logging('bgCyan', 'Checking messages\r');
 
             // get unread messages
             r.getUnreadMessages().then((messages) => {
@@ -84,7 +84,7 @@ module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers
                     return;
                 }
 
-                Logging('cyan', 'New unread messages: ' + messages.length);
+                Logging('cyan', 'New unread messages: ' + messages.length +'\r' );
 
                 // loop through messages
                 messages.map((message, index) => {

@@ -4,12 +4,14 @@ var chalk = require('chalk');
 var snoowrap = require('snoowrap');
 
 var config = require('./src/config/config.js');
-
 var RequestHandler = require('./src/RequestHandler.js');
 var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
 var DatabaseHandler = require('./src/DatabaseHandler.js')(ExpressSocket);
 var Logging = require('./src/Logging')(ExpressSocket);
 var Utils = require('./src/Utils.js');
+
+var foundUsers = 0,
+    sentResponses = 0;
 
 // server list
 var servers = true;
@@ -38,7 +40,7 @@ var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, ExpressSocket, champi
 function isReady() {
     if (servers === true) {
         servers = false;
-        Logging('cyan', 'Loading servers');
+        Logging('cyan', 'Loading servers\n');
         RequestHandler.request(
             config.api_base + '/static/servers',
             (result) => {
@@ -58,7 +60,7 @@ function isReady() {
     }
     if (champions === true) {
         champions = false;
-        Logging('cyan', 'Loading champions');
+        Logging('cyan', 'Loading champions\n');
         RequestHandler.request(
             config.api_base + '/static/champions',
             (result) => {
@@ -88,13 +90,14 @@ function isReady() {
 setTimeout(()=> {
     // wait a bit for everything to be online
     isReady();
-    Responder.getResponses();
+    // Responder.getResponses();
 }, 500);
 
+// timer
 setInterval(()=> {
     isReady();
-    Responder.getResponses();
-}, 30 * 1000);
+    // Responder.getResponses();
+}, 4 * 1000);
 
 
 

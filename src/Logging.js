@@ -7,7 +7,9 @@ module.exports = function (ExpressSocket) {
         if (color) {
             res = chalk[color](input);
         }
-        console.log(res);
+
+        process.stdout.write(res);
+
         ExpressSocket.emit('new comment', {color: color, input: input});
     };
 
