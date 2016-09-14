@@ -28,7 +28,7 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
     }
 
     // credits
-    result += "___\n^(I am a bot, beep boop. Data is from https://www.masterypoints.com)\n___";
+    result += "___\nI am a bot, beep boop. For more info go [here](https://www.reddit.com/r/mastery_bot/comments/52ql82/mastery_bot_faq/)\n___";
 
     return result;
 }

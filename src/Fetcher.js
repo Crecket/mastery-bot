@@ -6,8 +6,10 @@ var Utils = require('./Utils.js');
 var config = require('./config/config.js');
 var chalk = require('chalk');
 
-module.exports = function (r, DatabaseHandler, ExpressSocket, champions, servers) {
-    var Logging = require('./Logging.js')(ExpressSocket);
+module.exports = function (r, DatabaseHandler, staticData) {
+    var Logging = require('./Logging.js');
+    var champions = staticData.champions;
+    var servers = staticData.servers;
 
     //*
     var Fetcher = {

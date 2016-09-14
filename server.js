@@ -5,13 +5,25 @@ var snoowrap = require('snoowrap');
 
 var config = require('./src/config/config.js');
 var RequestHandler = require('./src/RequestHandler.js');
-// var  = require('./src/.js')(config.port);
+var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
 var DatabaseHandler = require('./src/DatabaseHandler.js')();
 var Logging = require('./src/Logging')();
 var Utils = require('./src/Utils.js');
 
-var foundUsers = 0,
-    sentResponses = 0;
+var genericInfo = {
+    // most recent username and server
+    recentUser: false,
+
+    // amount of times we request unread messages and how many we received
+    unreadMessagesChecked: 0,
+    unreadMessagesReceived: 0,
+
+    // amount of users we parsed from messages
+    foundUsers: 0,
+
+    // reply count
+    sentResponses: 0
+};
 
 // server list
 var servers = true;
@@ -33,8 +45,11 @@ const r = new snoowrap({
 });
 
 // helper objects
-var Responder = require('./src/Responder')(r, DatabaseHandler );
-var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, champions, servers);
+var Responder = require('./src/Responder')(r, DatabaseHandler, (amount) => {
+    // sent a response succesfuly
+    genericInfo.sentResponses += amount;
+});
+var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions});
 
 // check if we have the servers and champions
 function isReady() {

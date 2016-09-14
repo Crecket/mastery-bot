@@ -1,6 +1,6 @@
 var chalk = require('chalk');
 
-module.exports = function (ExpressSocket) {
+module.exports = function () {
 
     return function (color, input) {
         var res = input;
@@ -10,7 +10,7 @@ module.exports = function (ExpressSocket) {
 
         process.stdout.write(res);
 
-        ExpressSocket.emit('new comment', {color: color, input: input});
+        // ExpressSocket.emit('new comment', {color: color, input: input});
     };
 
 };

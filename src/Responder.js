@@ -4,8 +4,8 @@ var RequestHandler = require('./RequestHandler.js');
 var Utils = require('./Utils.js');
 var config = require('./config/config.js');
 
-module.exports = function (r, DatabaseHandler, ExpressSocket) {
-    var Logging = require('./Logging')(ExpressSocket);
+module.exports = function (r, DatabaseHandler, sentResponses) {
+    var Logging = require('./Logging');
 
     var Responder = {
         getResponses: () => {
@@ -39,6 +39,9 @@ module.exports = function (r, DatabaseHandler, ExpressSocket) {
                                 // comment may not exist or some other error was thrown
                                 Logging('green', 'Replied to ' + value.id);
                                 DatabaseHandler.set_response_sent(value.id);
+
+                                // + 1
+                                sentResponses(1);
                             }).catch(err => {
                                 // comment may not exist or some other error was thrown
                                 Logging('red', 'Failed to reply to comment ID: ' + value.id);

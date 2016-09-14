@@ -1,8 +1,8 @@
 // get sql module
 var sqlite3 = require("sqlite3").verbose();
 
-module.exports = function (ExpressSocket) {
-    var Logging = require('./Logging')(ExpressSocket);
+module.exports = function () {
+    var Logging = require('./Logging');
 
     var DatabaseHandler = {
         db: false,
