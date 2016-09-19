@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#142F4C">
+    <meta name="msapplication-navbutton-color" content="#142F4C">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#142F4C">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="description" content="" itemprop="about">-->
+    <!--<meta name="keywords" content="" itemprop="keywords">-->
+    <meta name="author" content="Gregory Goijaerts (crecketgaming@gmail.com)" itemprop="author">
+    <link rel="icon" type="image/png" href="//www.masterypoints.com/assets/img/favicon.png">
+    <meta itemprop='name' content="MasteryPoints">
+    <meta itemprop='alternateName' content="MasteryPts">
+    <link rel="canonical" href="//www.masterypoints.com" itemprop="url">
+    <title>MP | Mastery Bot Results</title>
+    <link href="//fonts.googleapis.com/css?family=Roboto:100,400" rel="stylesheet">
+
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+</head>
+<body>
+
+<div class="container">
+    <table class="responsive-table striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody id="comments">
+        </tbody>
+    </table>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script>
+    var socket = io();
+    socket.on('new comment', function (data) {
+        var text = data.input.replace("\n", "<br>");
+        console.log(data);
+        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' + new Date().toLocaleString() + '</strong>: </td><td>' + text + '</td></tr>');
+    });
+</script>
+</body>
+</html>

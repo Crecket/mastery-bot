@@ -45,5 +45,7 @@ module.exports = function (genericInfo, config) {
         genericInfo.nextTimer = config.pollTimer;
     }
     // graph
-    console.log(CLUI.Gauge(genericInfo.nextTimer, config.pollTimer, 70, config.pollTimer * 0.8, genericInfo.nextTimer / 1000 + ' seconds'));
+    console.log(CLUI.Gauge(genericInfo.nextTimer, config.pollTimer, 70,
+        config.pollTimer * 0.8, genericInfo.nextTimer / 1000 + " / " + config.pollTimer / 1000 + ' seconds'
+    ));
 }

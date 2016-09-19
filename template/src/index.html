@@ -31,9 +31,6 @@
           type='text/css'>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- inject:css -->
-    <link rel="stylesheet" href="css/lib/getmdl-select.min.css">
-    <link rel="stylesheet" href="css/lib/nv.d3.css">
-    <link rel="stylesheet" href="css/application.css">
     <!-- endinject -->
 
 </head>
@@ -197,16 +194,18 @@
 </div>
 
 <!-- inject:js -->
-<script src="js/d3.js"></script>
-<script src="js/getmdl-select.min.js"></script>
-<script src="js/material.js"></script>
-<script src="js/nv.d3.js"></script>
-<script src="js/widgets/employer-form/employer-form.js"></script>
-<script src="js/widgets/line-chart/line-chart-nvd3.js"></script>
-<script src="js/widgets/pie-chart/pie-chart-nvd3.js"></script>
-<script src="js/widgets/table/table.js"></script>
-<script src="js/widgets/todo/todo.js"></script>
 <!-- endinject -->
 
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+<script>
+    var socket = io();
+    socket.on('new comment', function (data) {
+        var text = data.input.replace("\n", "<br>");
+        console.log(data);
+        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' + new Date().toLocaleString() + '</strong>: </td><td>' + text + '</td></tr>');
+    });
+</script>
 </body>
 </html>
