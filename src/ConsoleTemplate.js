@@ -37,15 +37,13 @@ module.exports = function (genericInfo, config) {
         .column(genericInfo.sentResponses.toString(), 20)
         .fill()
         .output();
-    // var os   = require('os'),
-    //     clui = require('clui');
-    //
-    // var Gauge = clui.Gauge;
-    //
-    // var total = os.totalmem();
-    // var free = os.freemem();
-    // var used = total - free;
-    // var human = Math.ceil(used / 1000000) + ' MB';
-    //
-    // console.log(Gauge(used, total, 70, total * 0.8, human));
+
+    // fallbacks
+    if (genericInfo.nextTimer <= 0) {
+        genericInfo.nextTimer = 0;
+    } else if (genericInfo.nextTimer >= config.pollTimer) {
+        genericInfo.nextTimer = config.pollTimer;
+    }
+    // graph
+    console.log(CLUI.Gauge(genericInfo.nextTimer, config.pollTimer, 70, config.pollTimer * 0.8, genericInfo.nextTimer / 1000 + ' seconds'));
 }

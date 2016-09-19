@@ -3,17 +3,22 @@
 // npm modules
 var snoowrap = require('snoowrap');
 
+// custom modules
+var config = require('./src/config/config.js');
+
+// holds some stats for the server
 var genericInfo = {
+        // timer duration for the polling
+        nextTimer: 0,
+
         // most recent username and server
         recentUser: 'none',
 
         // amount of times we request unread messages and how many we received
         timesPolled: 0,
         timesReceived: 0,
-
         // amount of users we parsed from messages
         foundUsers: 0,
-
         // reply count
         sentResponses: 0,
 
@@ -31,13 +36,13 @@ var genericInfo = {
 const gotError = (err) => {
     genericInfo.errorList.push(err);
 };
+
 // add a error to the error list in the gui
 const gotMessage = (err) => {
     genericInfo.messageList.push(err);
 };
 
-// custom modules
-var config = require('./src/config/config.js');
+// helpers and classes
 var RequestHandler = require('./src/RequestHandler.js');
 // var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
 var DatabaseHandler = require('./src/DatabaseHandler.js')({gotError: gotError});
@@ -147,20 +152,24 @@ function start() {
     setInterval(()=> {
         isReady();
         Responder.getResponses();
+        genericInfo.nextTimer = 0;
     }, config.pollTimer);
-
 }
 
-//*
+// 1 second timer to keep track of the main timer progress. used in the gui
+setInterval(() => {
+    // minus 1 every second to keep track of the timer
+    genericInfo.nextTimer = genericInfo.nextTimer + 1000;
+}, 1000);
 
-// start polling
-start();
-
-const showGui = () =>{
+// refresh the guid for the console
+const showGui = () => {
     ConsoleTemplate(genericInfo, config);
 };
 
 // Show the console gui
 showGui();
-setInterval(showGui, 2000);
-//*/
+setInterval(showGui, 1000);
+
+// start polling
+start();
