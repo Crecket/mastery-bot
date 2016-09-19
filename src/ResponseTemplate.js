@@ -28,7 +28,8 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
     }
 
     // credits
-    result += "___\nI am a bot, beep boop. For more info go [here](https://www.reddit.com/r/mastery_bot/comments/52ql82/mastery_bot_faq/)\n___";
+    result += "___\nI am a bot, beep boop. I may take a while to respond due to the reddit rate limit. " +
+        "For more info go [here](https://www.reddit.com/r/mastery_bot/comments/52ql82/mastery_bot_faq/)\n___";
 
     return result;
 }

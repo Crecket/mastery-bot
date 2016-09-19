@@ -18,16 +18,22 @@ var genericInfo = {
         sentResponses: 0,
 
         // list of errors
-        errorList: []
+        errorList: [],
+        // list of generic messages
+        messageList: [],
     },
     // server list storage, is fetched from api
     servers = true,
     // champion list storage, is fetched from api
     champions = true;
 
-// add a error to the error list
+// add a error to the error list in the gui
 const gotError = (err) => {
     genericInfo.errorList.push(err);
+};
+// add a error to the error list in the gui
+const gotMessage = (err) => {
+    genericInfo.messageList.push(err);
 };
 
 // custom modules
@@ -57,6 +63,7 @@ const r = new snoowrap({
 var Responder = require('./src/Responder')(r, DatabaseHandler,
     {
         gotError: gotError,
+        gotMessage: gotMessage,
         sentResponse: () => {
             genericInfo.sentResponses += 1;
         },
