@@ -71,6 +71,7 @@ var Responder = require('./src/Responder')(r, DatabaseHandler,
 var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions},
     {
         gotError: gotError,
+        gotMessage: gotMessage,
         hasPolled: () => {
             genericInfo.timesPolled += 1;
         },
