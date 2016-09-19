@@ -3,7 +3,7 @@ var chalk = require('chalk');
 module.exports = function () {
     return function (color, input) {
         var res = input;
-        if (color) {
+        if (color && chalk[color]) {
             res = chalk[color](input);
         }
 

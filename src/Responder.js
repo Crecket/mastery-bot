@@ -12,18 +12,33 @@ module.exports = function (r, DatabaseHandler, callbacks) {
         firstItem: true,
         next: () => {
             if (Responder.queue.length > 0) {
-                if (Responder.firstItem) {
-                    // this is no longer the first item
-                    Responder.firstItem = false;
-                }else{
+                if (!Responder.firstItem) {
                     // delete last item
                     Responder.queue.pop();
                 }
                 // get the last item in the liast
                 var response = Responder.queue[0];
 
-                // attempt to send new response with last item
-                Responder.respond(response);
+                // how long before doing next action, 100 for first round, 2000 for ever next one
+                var delay = 100;
+
+                // if it is not the first time, put on a delay
+                if (!Responder.firstItem) {
+                    delay = 2000;
+                }
+
+                setTimeout(() => {
+                    // this is no longer the first item
+                    Responder.firstItem = false;
+
+                    if (response) {
+                        // attempt to send new response with last item
+                        Responder.respond(response);
+                    } else {
+                        // no more response
+                        Responder.finish();
+                    }
+                }, delay);
             }
         },
         finish: () => {
@@ -53,7 +68,7 @@ module.exports = function (r, DatabaseHandler, callbacks) {
                         DatabaseHandler.set_response_sent(response.id);
 
                         // add sent response callback count
-                        callbacks.sentResponses();
+                        callbacks.sentResponse();
 
                         // next item
                         Responder.next();
@@ -83,7 +98,7 @@ module.exports = function (r, DatabaseHandler, callbacks) {
                     callbacks.gotError(err);
 
                     // comment may not exist or some other error was thrown
-                    Logging('red', 'Failed to fetch comment ID: ' + value.id);
+                    Logging('red', 'Failed to fetch comment ID: ' + response.id);
                     Logging('red', err);
                 });
         },
