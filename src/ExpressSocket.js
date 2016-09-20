@@ -12,7 +12,7 @@ module.exports = function (config) {
     var server = https.Server(config.sslOptions, app);
 
     // bind socket io to server
-    var io = require('socket.io')(https);
+    var io = require('socket.io').listen(server);
 
     // static files
     app.use(express.static('public'));

@@ -73,29 +73,47 @@ gulp.task('default', ['cleanDist', 'jshint', 'babel', 'copyJsLib', 'copyCssLib']
         .pipe(gulp.dest('../public/images'));
     gulp.src('src/**/*.html')
         .pipe(gulp.dest('../public/'))
-        .pipe(inject(gulp.src(['../public/js/**/*.js', '../public/css/lib/*.css', '../public/css/*.css'], {read: false}), {relative: true}))
+        .pipe(inject(gulp.src([
+            '../public/js/**/*.js',
+            '../public/css/lib/*.css',
+            '../public/css/*.css'
+        ], {read: false}), {relative: true}))
         .pipe(gulp.dest('../public/'));
 });
 
 gulp.task('copyJsLib', ['cleanDist'], function () {
-    return gulp.src(['bower_components/material-design-lite/material.js', 'bower_components/d3/d3.js',
-        'bower_components/nvd3/build/nv.d3.js', 'bower_components/getmdl-select/getmdl-select.min.js'])
+    return gulp.src([
+        'bower_components/material-design-lite/material.js',
+        'bower_components/d3/d3.js',
+        'bower_components/nvd3/build/nv.d3.js',
+        'bower_components/getmdl-select/getmdl-select.min.js'
+    ])
         .pipe(gulp.dest('../public/js'));
 });
 
 gulp.task('copyMinJsLib', ['cleanDist'], function () {
-    return gulp.src(['bower_components/material-design-lite/material.min.js', 'bower_components/d3/d3.min.js',
-        'bower_components/nvd3/build/nv.d3.min.js', 'bower_components/getmdl-select/getmdl-select.min.js'])
+    return gulp.src([
+        'bower_components/material-design-lite/material.min.js',
+        'bower_components/d3/d3.min.js',
+        'bower_components/nvd3/build/nv.d3.min.js',
+        'bower_components/getmdl-select/getmdl-select.min.js'
+    ])
         .pipe(gulp.dest('../public/js'));
 });
 
 gulp.task('copyCssLib', ['cleanDist'], function () {
-    return gulp.src(['bower_components/nvd3/build/nv.d3.css', 'bower_components/getmdl-select/getmdl-select.min.css'])
+    return gulp.src([
+        'bower_components/nvd3/build/nv.d3.css',
+        'bower_components/getmdl-select/getmdl-select.min.css'
+    ])
         .pipe(gulp.dest('../public/css/lib'));
 });
 
 gulp.task('copyMinCssLib', ['cleanDist'], function () {
-    return gulp.src(['bower_components/nvd3/build/nv.d3.min.css', 'bower_components/getmdl-select/getmdl-select.min.css'])
+    return gulp.src([
+        'bower_components/nvd3/build/nv.d3.min.css',
+        'bower_components/getmdl-select/getmdl-select.min.css'
+    ])
         .pipe(gulp.dest('../public/css/lib'));
 });
 
@@ -124,8 +142,11 @@ gulp.task('minifyCss', ['cleanDist'], function () {
 gulp.task('build', ['minifyJs', 'minifyCss', 'copyMinCssLib', 'copyMinJsLib'], function () {
     gulp.src('src/*.html')
         .pipe(gulp.dest('../public/'))
-        .pipe(inject(gulp.src(['../public/js/**/*.js', '../public/css/lib/*.css',
-            '../public/css/*.css'], {read: false}), {relative: true}))
+        .pipe(inject(gulp.src([
+            '../public/js/**/*.js',
+            '../public/css/lib/*.css',
+            '../public/css/*.css'
+        ], {read: false}), {relative: true}))
         .pipe(gulp.dest('../public/'));
     gulp.src('src/images/**/*')
         .pipe(gulp.dest('../public/images'));
