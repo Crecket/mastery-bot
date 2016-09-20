@@ -1,11 +1,18 @@
 var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var https = require('https');
 var chalk = require('chalk');
 var path = require('path');
 
-module.exports = function (port) {
+module.exports = function (config) {
+
+    // new express app
+    var app = express();
+
+    // create a https server
+    var server = https.Server(config.sslOptions, app);
+
+    // bind socket io to server
+    var io = require('socket.io')(https);
 
     // static files
     app.use(express.static('public'));
@@ -21,8 +28,9 @@ module.exports = function (port) {
         });
     });
 
-    http.listen(port, function () {
-        console.log(chalk.bgBlue('Http and sockets listening on *:' + port));
+    // start listening
+    server.listen(config.port, function () {
+        console.log(chalk.bgBlue('Http and sockets listening on *:' + config.port));
     });
 
     return io;

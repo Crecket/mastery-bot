@@ -1,5 +1,9 @@
 "use strict";
 
+var os = require('os');
+console.log(os.hostname().trim());
+process.exit();
+
 // npm modules
 var snoowrap = require('snoowrap');
 
@@ -44,7 +48,7 @@ const gotMessage = (err) => {
 
 // helpers and classes
 var RequestHandler = require('./src/RequestHandler.js');
-var ExpressSocket = require('./src/ExpressSocket.js')(config.port);
+var ExpressSocket = require('./src/ExpressSocket.js')(config);
 var DatabaseHandler = require('./src/DatabaseHandler.js')({gotError: gotError});
 var ConsoleTemplate = require('./src/ConsoleTemplate');
 var Logging = require('./src/Logging')();

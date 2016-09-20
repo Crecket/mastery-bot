@@ -100,7 +100,7 @@ gulp.task('copyMinCssLib', ['cleanDist'], function () {
 });
 
 gulp.task('cleanDist', function () {
-    return del('../public/**/*');
+    return del('../public/**/*',{force: true});
 });
 
 gulp.task('minifyJs', ['cleanDist'], function () {
