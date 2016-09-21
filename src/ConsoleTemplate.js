@@ -22,7 +22,7 @@ module.exports = function (genericInfo, config) {
     var headerLine = new CLUI.Line()
         .padding(1)
         .column('Recent user', 15, [clc.cyan])
-        .column('Poll count', 15, [clc.cyan])
+        .column('Poll count', 12, [clc.cyan])
         .column('Received msgs', 15, [clc.cyan])
         .column('Summoners ', 12, [clc.cyan])
         .column('Responses', 12, [clc.cyan])
@@ -31,7 +31,7 @@ module.exports = function (genericInfo, config) {
     var columns = new CLUI.Line()
         .padding(1)
         .column(genericInfo.recentUser, 15)
-        .column(genericInfo.timesPolled.toString(), 15)
+        .column(genericInfo.timesPolled.toString(), 12)
         .column(genericInfo.timesReceived.toString(), 15)
         .column(genericInfo.foundUsers.toString(), 12)
         .column(genericInfo.sentResponses.toString(), 12)
@@ -45,7 +45,7 @@ module.exports = function (genericInfo, config) {
         genericInfo.nextTimer = config.pollTimer;
     }
     // graph
-    console.log(CLUI.Gauge(genericInfo.nextTimer, config.pollTimer, 70,
-        config.pollTimer * 0.8, genericInfo.nextTimer / 1000 + " / " + config.pollTimer / 1000 + ' seconds'
+    console.log(CLUI.Gauge(genericInfo.nextTimer, config.pollTimer, 56,
+        config.pollTimer * 0.8, genericInfo.nextTimer / 1000 + " / " + config.pollTimer / 1000
     ));
 }
