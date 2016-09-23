@@ -11,8 +11,8 @@ module.exports = function (callbacks) {
         init: (sqlite_location) => {
             this.db = new sqlite3.Database(sqlite_location);
             // this.db.run("CREATE TABLE IF NOT EXISTS submissions(id TEXT PRIMARY KEY NOT NULL)");
-            this.db.run("CREATE TABLE IF NOT EXISTS comments(id TEXT PRIMARY KEY)");
-            this.db.run("CREATE TABLE IF NOT EXISTS response(id TEXT PRIMARY KEY, markup TEXT, sent INTEGER)");
+            this.db.run("CREATE TABLE IF NOT EXISTS comments(id TEXT PRIMARY KEY, added TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
+            this.db.run("CREATE TABLE IF NOT EXISTS response(id TEXT PRIMARY KEY, markup TEXT, sent INTEGER, added TIMESTAMP DEFAULT CURRENT_TIMESTAMP)");
         },
 
         // Close database connection
