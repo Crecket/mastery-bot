@@ -118,20 +118,19 @@
 
                 <!-- Table-->
                 <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone ">
-                    <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp projects-table"> <!-- mdl-data-table--selectable -->
+                    <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp projects-table">
+                        <!-- mdl-data-table--selectable -->
                         <thead>
                         <tr>
                             <th class="mdl-data-table__cell--non-numeric"></th>
                             <th class="mdl-data-table__cell--non-numeric">Message</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="comments">
                         <tr>
                             <td class="mdl-data-table__cell--non-numeric">Darkboard</td>
                             <td class="mdl-data-table__cell--non-numeric">
                                 <span class="label label--mini background-color--mint">Alex</span>
-                                <span class="label label--mini background-color--primary">Dina</span>
-                                <span class="label label--mini background-color--cerulean">Misha</span>
                             </td>
                         </tr>
                         </tbody>
@@ -162,7 +161,14 @@
     socket.on('new comment', function (data) {
         var text = data.input.replace("\n", "<br>");
         console.log(data);
-        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' + new Date().toLocaleString() + '</strong>: </td><td>' + text + '</td></tr>');
+        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' +
+                new Date().toLocaleString() + '</strong>: </td><td>' + text + '</td></tr>');
+//        <tr><td class="mdl-data-table__cell--non-numeric">Darkboard</td>
+//            <td class="mdl-data-table__cell--non-numeric">
+//                <span class="label label--mini background-color--mint">Alex</span></td></tr>
+
+        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' +
+                new Date().toLocaleString() + '</strong>: </td><td>' + text + '</td></tr>');
     });
 </script>
 </body>

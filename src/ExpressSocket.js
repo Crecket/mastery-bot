@@ -22,7 +22,12 @@ module.exports = function (config) {
         res.sendFile(path.resolve(__dirname + '/../public/index.html'));
     });
 
+    // sockets
     io.on('connection', function (socket) {
+
+        socket.emit('new comment');
+
+        // test
         socket.on('chat message', function (msg) {
             io.emit('chat message', msg);
         });
