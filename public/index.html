@@ -129,13 +129,7 @@
                             <th class="mdl-data-table__cell--non-numeric">Message</th>
                         </tr>
                         </thead>
-                        <tbody id="comments">
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">Darkboard</td>
-                            <td class="mdl-data-table__cell--non-numeric">
-                                <span class="label label--mini background-color--mint">Alex</span>
-                            </td>
-                        </tr>
+                        <tbody id="system-log">
                         </tbody>
                     </table>
                 </div>
@@ -161,18 +155,24 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 <script>
     var socket = io();
-    socket.on('new comment', function (data) {
-        var text = data.input.replace("\n", "<br>");
-        console.log(data);
-        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' +
-                new Date().toLocaleString() + '</strong>: </td><td>' + text + '</td></tr>');
-//        <tr><td class="mdl-data-table__cell--non-numeric">Darkboard</td>
-//            <td class="mdl-data-table__cell--non-numeric">
-//                <span class="label label--mini background-color--mint">Alex</span></td></tr>
 
-        $('#comments').prepend('<tr><td style="color: ' + data.color + '"><strong>' +
-                new Date().toLocaleString() + '</strong>: </td><td>' + text + '</td></tr>');
+    function addLog(input, color) {
+        var template = '<tr>' +
+                '<td class="mdl-data-table__cell--numeric">' + new Date().toLocaleString() + '</td>' +
+                '<td class="mdl-data-table__cell--non-numeric">Comment</td>' +
+                '<td class="mdl-data-table__cell--non-numeric">' + input + '</td>' +
+                '<td class="mdl-data-table__cell--non-numeric">' +
+                '<span class="label label--mini background-color--mint ' + color + '">Comment</span>' +
+                '</td></tr>';
+        $('#system-log').prepend(template);
+    }
+
+    socket.on('system log', function (data) {
+        console.log('received log', data);
+        var text = data.input.replace("\n", "<br>");
+        addLog(text, data.color);
     });
+
 </script>
 </body>
 </html>

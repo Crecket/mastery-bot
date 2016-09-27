@@ -24,12 +24,9 @@ module.exports = function (config) {
 
     // sockets
     io.on('connection', function (socket) {
-
-        socket.emit('new comment');
-
-        // test
-        socket.on('chat message', function (msg) {
-            io.emit('chat message', msg);
+        socket.emit('system log', {
+            color: 'red',
+            input: 'some _text'
         });
     });
 
