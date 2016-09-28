@@ -34,12 +34,14 @@ var genericInfo = {
 
 // add a error to the error list in the gui
 const gotError = (err) => {
-    genericInfo.errorList.push(err);
+    // genericInfo.errorList.push(err);
+    ExpressSocket.error(genericInfo.sentResponses);
 };
 
 // add a error to the error list in the gui
-const gotMessage = (err) => {
-    genericInfo.messageList.push(err);
+const gotMessage = (msg) => {
+    // genericInfo.messageList.push(msg);
+    ExpressSocket.success(msg);
 };
 
 // helpers and classes
@@ -71,6 +73,7 @@ var Responder = require('./src/Responder')(r, DatabaseHandler,
         gotMessage: gotMessage,
         sentResponse: () => {
             genericInfo.sentResponses += 1;
+            ExpressSocket.debug('Polled ' + genericInfo.sentResponses);
         },
     });
 var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions},
@@ -79,12 +82,15 @@ var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, ch
         gotMessage: gotMessage,
         hasPolled: () => {
             genericInfo.timesPolled += 1;
+            ExpressSocket.debug('Polled ' + genericInfo.timesPolled);
         },
         hasReceived: () => {
             genericInfo.timesReceived += 1;
+            ExpressSocket.debug('Polled ' + genericInfo.timesReceived);
         },
         hasFound: (username) => {
             genericInfo.recentUser = username;
+            ExpressSocket.io.emit('recent_user',genericInfo.recentUser);
         },
     }
 );

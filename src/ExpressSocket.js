@@ -24,10 +24,7 @@ module.exports = function (config) {
 
     // sockets
     io.on('connection', function (socket) {
-        socket.emit('system log', {
-            color: 'red',
-            input: 'some _text'
-        });
+        io.emit('system success', 'Connected');
     });
 
     // start listening
@@ -35,5 +32,16 @@ module.exports = function (config) {
         console.log(chalk.bgBlue('Http and sockets listening on *:' + config.port));
     });
 
-    return io;
+    return {
+        io: io,
+        success: (data)=> {
+            io.emit('system success', data);
+        },
+        error: (data)=> {
+            io.emit('system error', data);
+        },
+        debug: (data)=> {
+            io.emit('system debug', data);
+        },
+    };
 };

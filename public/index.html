@@ -125,7 +125,7 @@
                         <!-- mdl-data-table--selectable -->
                         <thead>
                         <tr>
-                            <th class="mdl-data-table__cell--non-numeric"></th>
+                            <th class="mdl-data-table__cell--non-numeric">Date</th>
                             <th class="mdl-data-table__cell--non-numeric">Message</th>
                         </tr>
                         </thead>
@@ -158,19 +158,27 @@
 
     function addLog(input, color) {
         var template = '<tr>' +
-                '<td class="mdl-data-table__cell--numeric">' + new Date().toLocaleString() + '</td>' +
-                '<td class="mdl-data-table__cell--non-numeric">Comment</td>' +
-                '<td class="mdl-data-table__cell--non-numeric">' + input + '</td>' +
                 '<td class="mdl-data-table__cell--non-numeric">' +
-                '<span class="label label--mini background-color--mint ' + color + '">Comment</span>' +
-                '</td></tr>';
+                '<span class="label label--mini background-color--' + color + '">' + new Date().toLocaleString() + '</span></td>' +
+                '<td class="mdl-data-table__cell--non-numeric">' + input + '</td>' +
+                '</tr>';
         $('#system-log').prepend(template);
     }
 
-    socket.on('system log', function (data) {
-        console.log('received log', data);
-        var text = data.input.replace("\n", "<br>");
-        addLog(text, data.color);
+    socket.on('system debug', function (data) {
+        console.log('received debug', data);
+        addLog(data, 'cerulean');
+    });
+    socket.on('system error', function (data) {
+        console.log('received error', data);
+        addLog(data, 'secondary');
+    });
+    socket.on('system success', function (data) {
+        console.log('received success', data);
+        addLog(data, 'mint');
+    });
+    socket.on('recent user', function (data) {
+        console.log('recent user', data);
     });
 
 </script>
