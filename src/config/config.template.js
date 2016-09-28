@@ -28,7 +28,7 @@ config.client_secret = "";
 config.offlineHostName = "Gregmain-PC";
 
 // check if online host name is found
-if (os.hostname().trim() === config.offlineHostName) {
+if (os.hostname().trim() === config.offlineHostName || os.hostname().trim() === 'Greg-PC') {
     config.sslOptions = {
         key: fs.readFileSync('src/certs/localhost.key'),
         cert: fs.readFileSync('src/certs/localhost.crt'),

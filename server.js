@@ -63,12 +63,12 @@ var foundUsersMetric = probe.metric({
 
 // add a error to the error list in the gui
 const gotError = (err) => {
-    genericInfo.errorList.push(err);
+    // genericInfo.errorList.push(err);
 };
 
 // add a error to the error list in the gui
-const gotMessage = (err) => {
-    genericInfo.messageList.push(err);
+const gotMessage = (msg) => {
+    // genericInfo.messageList.push(msg);
 };
 
 // helpers and classes
