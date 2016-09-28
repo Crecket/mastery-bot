@@ -9,7 +9,7 @@ config.sqliteDb = "./database.db";
 config.user_limit = 1;
 
 // http/socket port
-config.port = 8080;
+config.port = 13337;
 
 // check every 'x' ms
 config.pollTimer = 30 * 1000;

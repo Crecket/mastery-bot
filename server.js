@@ -1,7 +1,10 @@
 "use strict";
 
 // npm modules
-var snoowrap = require('snoowrap');
+const snoowrap = require('snoowrap');
+
+// pmx module to add metrics to the dashboard
+const probe = require('pmx').probe();
 
 // custom modules
 var config = require('./src/config/config.js');
@@ -32,6 +35,32 @@ var genericInfo = {
     // champion list storage, is fetched from api
     champions = true;
 
+// keymetrics
+var timesReceivedMetric = probe.metric({
+    name: 'Received',
+    value: function () {
+        return genericInfo.sentResponses;
+    }
+});
+var sentResponsesMetric = probe.metric({
+    name: 'Responses',
+    value: function () {
+        return genericInfo.sentResponses;
+    }
+});
+var timesPolledMetric = probe.metric({
+    name: 'Times Polled',
+    value: function () {
+        return genericInfo.timesPolled;
+    }
+});
+var foundUsersMetric = probe.metric({
+    name: 'Found Users',
+    value: function () {
+        return genericInfo.foundUsers;
+    }
+});
+
 // add a error to the error list in the gui
 const gotError = (err) => {
     genericInfo.errorList.push(err);
@@ -44,7 +73,6 @@ const gotMessage = (err) => {
 
 // helpers and classes
 var RequestHandler = require('./src/RequestHandler.js');
-// var ExpressSocket = require('./src/ExpressSocket.js')(config);
 var DatabaseHandler = require('./src/DatabaseHandler.js')({gotError: gotError});
 var ConsoleTemplate = require('./src/ConsoleTemplate');
 var Logging = require('./src/Logging')();
@@ -166,7 +194,6 @@ setInterval(() => {
 const showGui = () => {
     ConsoleTemplate(genericInfo, config);
 };
-
 // Show the console gui
 showGui();
 setInterval(showGui, 1000);
