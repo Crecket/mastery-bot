@@ -43,6 +43,29 @@ module.exports = function (callbacks) {
 
         },
 
+        // Check if a reddit submission id is already sent
+        is_sent: (id, callback) => {
+            try {
+                this.db.get("SELECT * FROM response WHERE id = ? AND sent = 1", id, (err, row) => {
+                    if (err) {
+                        callbacks.gotError(err);
+                        Logging('red', err);
+                        return;
+                    }
+
+                    var found = true;
+                    if (!row) {
+                        found = false;
+                    }
+
+                    callback({id: id, found: found});
+                });
+            } catch (ex) {
+                return callback({id: id, found: false});
+            }
+
+        },
+
         // Check if a reddit submission id is already stored
         insert_id: (id) => {
             Logging('cyan', 'Inserting ID into comment', id);

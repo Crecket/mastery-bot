@@ -4,6 +4,10 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
         summoner_info.name + "** on **" + summoner_info.server.toUpperCase() + "** ^\(click for full profile\)]" +
         "(https://www.masterypoints.com/player/" + summoner_info.name + "/" + summoner_info.server.toUpperCase() + ")\n\n";
 
+    if(!summoner_info.division){
+        summoner_info.division = "";
+    }
+
     // total points and other generic data
     result += "*General information*\n\n";
     result += "Type | Value\n" +

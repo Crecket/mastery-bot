@@ -61,36 +61,44 @@ module.exports = function (r, DatabaseHandler, callbacks) {
             // fetch comment and see it if is valid/not removed
             comment.fetch()
                 .then(comment => {
-                    // comment is valid, reply to the comment
-                    comment.reply(response.markup).then(success => {
-                        // comment may not exist or some other error was thrown
-                        Logging('green', 'Replied to ' + response.id);
-                        DatabaseHandler.set_response_sent(response.id);
 
-                        // add sent response callback count
-                        callbacks.sentResponse();
+                    // recheck if id isn't sent yet
+                    DatabaseHandler.is_sent(response.id, (res) => {
 
-                        // next item
-                        Responder.next();
-                    }).catch(err => {
-                        callbacks.gotError({err: err});
+                        // check if not found
+                        if (res.found === false) {
+                            // comment is valid, reply to the comment
+                            comment.reply(response.markup).then(success => {
+                                // comment may not exist or some other error was thrown
+                                Logging('green', 'Replied to ' + response.id);
+                                DatabaseHandler.set_response_sent(response.id);
 
-                        // comment may not exist or some other error was thrown
-                        Logging('red', 'Failed to reply to comment ID: ' + response.id);
+                                // add sent response callback count
+                                callbacks.sentResponse();
 
-                        // check the error type
-                        let type = err.message.split(",");
-                        if (type[0] === "RATELIMIT") {
-                            Logging('red', 'Stopping current queue, ratelimit reached');
-                            // stop any further attempts, we reached our limit or something went wrongs
-                            Responder.finish();
+                                // next item
+                                Responder.next();
+                            }).catch(err => {
+                                callbacks.gotError({err: err});
 
-                        } else if (type[0] === "DELETED_COMMENT") {
-                            Logging('red', 'Comment was deleted.');
-                            // set sent, we cant respond
-                            DatabaseHandler.set_response_sent(response.id);
-                            // stop any further attempts, we reached our limit or something went wrongs
-                            Responder.next();
+                                // comment may not exist or some other error was thrown
+                                Logging('red', 'Failed to reply to comment ID: ' + response.id);
+
+                                // check the error type
+                                let type = err.message.split(",");
+                                if (type[0] === "RATELIMIT") {
+                                    Logging('red', 'Stopping current queue, ratelimit reached');
+                                    // stop any further attempts, we reached our limit or something went wrongs
+                                    Responder.finish();
+
+                                } else if (type[0] === "DELETED_COMMENT") {
+                                    Logging('red', 'Comment was deleted.');
+                                    // set sent, we cant respond
+                                    DatabaseHandler.set_response_sent(response.id);
+                                    // stop any further attempts, we reached our limit or something went wrongs
+                                    Responder.next();
+                                }
+                            });
                         }
                     });
                 })
