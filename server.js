@@ -112,6 +112,7 @@ var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, ch
             genericInfo.timesReceived += 1;
         },
         hasFound: (username) => {
+            genericInfo.foundUsers += 1;
             genericInfo.recentUser = username;
         },
     }
