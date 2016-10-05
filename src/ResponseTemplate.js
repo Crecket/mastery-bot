@@ -1,7 +1,7 @@
 module.exports = function (summoner_info, summoner_mastery, topChampions, champions) {
     // header
     var result = "___\nMasterypoints information for [**" +
-        summoner_info.name + "** on **" + summoner_info.server.toUpperCase() + "** ^\(click for full profile\)]" +
+        summoner_info.name + "** on **" + summoner_info.server.toUpperCase() + "** ^]" +
         "(https://www.masterypoints.com/player/" + summoner_info.name + "/" + summoner_info.server.toUpperCase() + ")\n\n";
 
     if(!summoner_info.division){
@@ -32,8 +32,8 @@ module.exports = function (summoner_info, summoner_mastery, topChampions, champi
     }
 
     // credits
-    result += "___\nI am a bot, beep boop. I may take a while to respond due to the reddit rate limit. " +
-        "For more info go [here](https://www.reddit.com/r/mastery_bot/comments/52ql82/mastery_bot_faq/)\n___";
+    result += "___\nI am a bot, beep boop. For more info about the me, [go here](https://www.reddit.com/r/mastery_bot/comments/52ql82/mastery_bot_faq/). \n\n" +
+        "To avoid spamming a post with my replies, please [use the website](https://www.masterypoints.com) for a more complete profile.\n___";
 
     return result;
 }
