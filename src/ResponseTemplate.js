@@ -1,7 +1,7 @@
 module.exports = function (summoner_info, summoner_mastery, topChampions, champions) {
     // header
     var result = "___\nMasterypoints information for [**" +
-        summoner_info.name + "** on **" + summoner_info.server.toUpperCase() + "** ^]" +
+        summoner_info.name + "** on **" + summoner_info.server.toUpperCase() + "**]" +
         "(https://www.masterypoints.com/player/" + summoner_info.name + "/" + summoner_info.server.toUpperCase() + ")\n\n";
 
     if(!summoner_info.division){
