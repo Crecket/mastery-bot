@@ -1,5 +1,6 @@
 "use strict";
 
+var SummonerResponseTemplate = require('./ResponseTemplates/Summoner');
 var ResponseTemplate = require('./ResponseTemplate.js');
 var RequestHandler = require('./RequestHandler.js');
 var Parser = require('./Parser.js');
@@ -49,7 +50,7 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                 summonerMastery = result.summoner_mastery;
 
                 // create markup template
-                var markupCode = ResponseTemplate(summonerInfo, summonerMastery, topChampions, champions);
+                var markupCode = SummonerResponseTemplate(summonerInfo, summonerMastery, topChampions, champions);
 
                 // this ID is new, insert into the database
                 DatabaseHandler.insert_response(message.id, markupCode);
