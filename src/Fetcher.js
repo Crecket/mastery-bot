@@ -109,7 +109,9 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                             if (check_result.found === false) {
 
                                 // parse all users from the comment
-                                var resultingUsers = Parser.parseBody(message.body);
+                                var resultingData = Parser.parseBody(message.body);
+
+                                var resultingUsers = resultingData.summoners;
 
                                 resultingUsers.map((resultingUser, userIndex) => {
                                     if (!Fetcher.serverValid(resultingUser['server'])) {

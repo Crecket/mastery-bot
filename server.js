@@ -1,5 +1,21 @@
 "use strict";
 
+// var str =
+//     "/u/mastery_bot crecket / euw " +
+//     "u/mastery_bot crecket / euw " +
+//     "/u/mastery_bot @champion cho'gath / any " +
+//     "u/mastery_bot @champion cho'gath / euw " +
+//     "/u/mastery_bot @total any " +
+//     "u/mastery_bot @total euw ";
+//
+// const Parser = require('./src/Parser');
+//
+// var res = Parser.parseBody(str);
+//
+// console.log(res);
+//
+// process.exit();
+
 // npm modules
 const snoowrap = require('snoowrap');
 
