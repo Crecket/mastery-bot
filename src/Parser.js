@@ -21,7 +21,7 @@ module.exports = {
         // run through parsers
         resultData.summoners = SummonerParser.parseBody(string);
         resultData.champion_highscores = ChampionParser.parseBody(string);
-        resultData.total_highscores = TotalParser.parseBody(string);
+        // resultData.total_highscores = TotalParser.parseBody(string);
 
         // return results
         return resultData;

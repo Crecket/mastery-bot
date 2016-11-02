@@ -25,7 +25,7 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
             servers = newServers;
         },
 
-        parserCallback: (resultingData) => {
+        parserCallback: (message, resultingData) => {
 
             // summoners have highest priority
             if (resultingData.summoners.length > 0) {
@@ -83,13 +83,14 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
 
                 // loop through found users
                 for (var championKey in champion_highscores) {
-                    var targetUrl = config.api_base + '/champion' +
-                        '/' + encodeURIComponent(champion_highscores[championKey]['pretty_name']).trim() +
-                        '/' + champion_highscores[championKey]['server'];
+                    var targetUrl = config.api_base + '/highscores/champion' +
+                        '/' + champions[champion_highscores[championKey]['champion']]['id'] +
+                        '/0/20/' + champion_highscores[championKey]['server'];
+
                     RequestHandler.request(
                         targetUrl,
                         (body) => {
-                            Fetcher.summonerApiCallback(message, body);
+                            Fetcher.championApiCallback(message, body);
                         },
                         (err, body) => {
                             callbacks.gotError(err);
@@ -100,31 +101,32 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                 }
 
             } else if (resultingData.champion_highscores.length > 0) {
+                var champion_highscores = resultingData.champion_highscores;
 
-                var resultingUsers = resultingData.summoners;
-
-                resultingUsers.map((resultingUser, userIndex) => {
+                champion_highscores.map((resultingUser, userIndex) => {
                     if (!Fetcher.serverValid(resultingUser['server'])) {
                         // server entered is invalid, remove it from the list
-                        delete resultingUsers[userIndex];
-                    } else {
-                        // set most recent username
-                        callbacks.hasFound(resultingUser.summoner);
+                        delete champion_highscores[userIndex];
+                    } else if (!Fetcher.championValid(resultingUser['champion'])) {
+                        // champion entered is invalid, remove it from the list
+                        delete champion_highscores[userIndex];
                     }
                 });
 
-                // set the max amount of users
-                resultingUsers = resultingUsers.slice(0, config.user_limit);
-                Logging('cyan', 'Found summoners: ');
-                Logging(false, resultingUsers);
+                // set the max amount of highscores to lookup
+                champion_highscores = champion_highscores.slice(0, config.champion_highscores_limit);
+                Logging('cyan', 'Found champion highscores: ');
+                Logging(false, champion_highscores);
 
                 // loop through found users
-                for (var userKey in resultingUsers) {
-                    var targetUrl = config.api_base + '/summoner/' + encodeURIComponent(resultingUsers[userKey]['summoner']).trim() + '/' + resultingUsers[userKey]['server'] + '?debug=1231423123';
+                for (var championKey in champion_highscores) {
+                    var targetUrl = config.api_base + '/champion' +
+                        '/' + champion_highscores[championKey]['id'] +
+                        '/0/20/' + champion_highscores[championKey]['server'];
                     RequestHandler.request(
                         targetUrl,
                         (body) => {
-                            Fetcher.summonerApiCallback(message, body);
+                            Fetcher.championApiCallback(message, body);
                         },
                         (err, body) => {
                             callbacks.gotError(err);
@@ -137,8 +139,8 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
             }
         },
 
-        // champion highscores api lookup callback
-        championApiCallback: (message, body) => {
+        // total points highscores api lookup callback
+        totalApiCallback: (message, body) => {
             // attempt to parse data
             var result = false;
             try {
@@ -164,6 +166,25 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
 
                 // create markup template
                 var markupCode = ChampionHighscoresResponseTemplate(summonerInfo, summonerMastery, topChampions, champions);
+
+                // this ID is new, insert into the database
+                DatabaseHandler.insert_response(message.id, markupCode);
+            }
+        },
+
+        // champion highscores api lookup callback
+        championApiCallback: (message, body) => {
+            // attempt to parse data
+            var result = false;
+            try {
+                result = JSON.parse(body);
+            } catch (err) {
+                callbacks.gotError(err);
+            }
+
+            if (result) {
+                // create markup template
+                var markupCode = ChampionHighscoresResponseTemplate(result.highscores, champions);
 
                 // this ID is new, insert into the database
                 DatabaseHandler.insert_response(message.id, markupCode);
@@ -227,7 +248,8 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
 
         // check if the champion exists
         championValid: (champion) => {
-            var tempChampion = champion.toLowerCase();
+            var tempChampion = champion.toLowerCase().trim();
+
             if (champions[tempChampion]) {
                 return true;
             } else {
@@ -235,7 +257,7 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                     if (
                         champions[key]['name'].toLowerCase() === tempChampion ||
                         champions[key]['pretty_name'].toLowerCase() === tempChampion ||
-                        champions[key]['champ_key'].toLowerCase() === tempChampion
+                        champions[key]['champkey'].toLowerCase() === tempChampion
                     ) {
                         return true;
                     }
@@ -278,7 +300,7 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                                 var resultingData = Parser.parseBody(message.body);
 
                                 // check the parser results
-                                this.parserCallback(resultingData);
+                                Fetcher.parserCallback(message, resultingData);
 
                                 // this ID is new and has been checked
                                 DatabaseHandler.insert_id(check_result.id);

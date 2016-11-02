@@ -1,4 +1,18 @@
 "use strict";
+/** =============== response tests ============== */
+
+// const ChampionHighscoresResponseTemplate = require('./src/ResponseTemplates/ChampionHighscores');
+// const fs = require('fs');
+//
+// var testdata = JSON.parse(fs.readFileSync('./tests/sampleData/championHighscoreData.json'));
+// var champions = JSON.parse(fs.readFileSync('./tests/sampleData/championTestData.json'));
+//
+// var res = ChampionHighscoresResponseTemplate(testdata.highscores, champions.champions);
+//
+// console.log(res);
+// process.exit();
+
+/** =============== parsing tests ============== */
 
 // var str =
 //     "/u/mastery_bot crecket / euw " +
@@ -15,6 +29,8 @@
 // console.log(res);
 //
 // process.exit();
+
+/** =============== end tests ============== */
 
 // npm modules
 const snoowrap = require('snoowrap');
@@ -166,6 +182,13 @@ function isReady() {
                 if (championsJson.champions) {
                     champions = championsJson.champions;
                 }
+
+                // reformat champions
+                for(var key in champions){
+                    champions[champions[key]['champkey']] = champions[key];
+                    champions[champions[key]['pretty_name']] = champions[key];
+                }
+
                 Fetcher.updateChampions(champions);
                 isReady();
             },
@@ -207,13 +230,13 @@ setInterval(() => {
     genericInfo.nextTimer = genericInfo.nextTimer + 1000;
 }, 1000);
 
-// refresh the guid for the console
-const showGui = () => {
-    ConsoleTemplate(genericInfo, config);
-};
-// Show the console gui
-showGui();
-setInterval(showGui, 1000);
+// // refresh the guid for the console
+// const showGui = () => {
+//     ConsoleTemplate(genericInfo, config);
+// };
+// // Show the console gui
+// showGui();
+// setInterval(showGui, 1000);
 
 // start polling
 start();
