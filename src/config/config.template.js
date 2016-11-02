@@ -24,29 +24,4 @@ config.password = "!IGmMy18vaYUw$@*x8o&";
 config.client_id = "e370ZMUhGZZxoA";
 config.client_secret = "";
 
-// online hostname, if i doesn't match use local settings
-config.offlineHostName = "Gregmain-PC";
-
-// check if online host name is found
-if (os.hostname().trim() === config.offlineHostName || os.hostname().trim() === 'Greg-PC') {
-    config.sslOptions = {
-        key: fs.readFileSync('src/certs/localhost.key'),
-        cert: fs.readFileSync('src/certs/localhost.crt'),
-        ca: [fs.readFileSync('src/certs/localhostCA.pem')],
-        ciphers: ["ECDHE-RSA-AES256-SHA384", "DHE-RSA-AES256-SHA384", "ECDHE-RSA-AES256-SHA256", "DHE-RSA-AES256-SHA256", "ECDHE-RSA-AES128-SHA256", "DHE-RSA-AES128-SHA256", "HIGH", "!aNULL", "!eNULL", "!EXPORT", "!DES", "!RC4", "!MD5", "!PSK", "!SRP", "!CAMELLIA"].join(':'),
-        honorCipherOrder: true,
-        requestCert: false
-    };
-} else {
-    config.sslOptions = {
-        key: fs.readFileSync('/home/crecket/server.key'),
-        cert: fs.readFileSync('/home/crecket/masterypoints_com.crt'),
-        // ca is required in most cases or some devices will decline the ssl certificate
-        ca: [fs.readFileSync('/home/crecket/bundle.crt')],
-        ciphers: ["ECDHE-RSA-AES256-SHA384", "DHE-RSA-AES256-SHA384", "ECDHE-RSA-AES256-SHA256", "DHE-RSA-AES256-SHA256", "ECDHE-RSA-AES128-SHA256", "DHE-RSA-AES128-SHA256", "HIGH", "!aNULL", "!eNULL", "!EXPORT", "!DES", "!RC4", "!MD5", "!PSK", "!SRP", "!CAMELLIA"].join(':'),
-        honorCipherOrder: true,
-        requestCert: false
-    };
-}
-
 module.exports = config;
