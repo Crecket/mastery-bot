@@ -51,11 +51,27 @@
 // npm modules
 const snoowrap = require('snoowrap');
 
-// pmx module to add metrics to the dashboard
-const probe = require('pmx').probe();
-
 // custom modules
 var config = require('./src/config/config.js');
+
+// command line arguments
+const commandLineArgs = require('command-line-args');
+
+// parse the arguments
+const options = commandLineArgs([
+    {
+        name: 'gui',
+        alias: 'g',
+        type: Boolean,
+        defaultValue: false
+    },
+    {
+        name: 'logging',
+        alias: 'l',
+        type: Boolean,
+        defaultValue: false
+    },
+]);
 
 // holds some stats for the server
 var genericInfo = {
@@ -83,45 +99,9 @@ var genericInfo = {
     // champion list storage, is fetched from api
     champions = true;
 
-// keymetrics
-var timesReceivedMetric = probe.metric({
-    name: 'Received',
-    value: function () {
-        return genericInfo.sentResponses;
-    }
-});
-var sentResponsesMetric = probe.metric({
-    name: 'Responses',
-    value: function () {
-        return genericInfo.sentResponses;
-    }
-});
-var timesPolledMetric = probe.metric({
-    name: 'Times Polled',
-    value: function () {
-        return genericInfo.timesPolled;
-    }
-});
-var foundUsersMetric = probe.metric({
-    name: 'Found Users',
-    value: function () {
-        return genericInfo.foundUsers;
-    }
-});
-
-// add a error to the error list in the gui
-const gotError = (err) => {
-    // genericInfo.errorList.push(err);
-};
-
-// add a error to the error list in the gui
-const gotMessage = (msg) => {
-    // genericInfo.messageList.push(msg);
-};
-
 // helpers and classes
 var RequestHandler = require('./src/RequestHandler.js');
-var DatabaseHandler = require('./src/DatabaseHandler.js')({gotError: gotError});
+var DatabaseHandler = require('./src/DatabaseHandler.js')();
 var ConsoleTemplate = require('./src/ConsoleTemplate');
 var Logging = require('./src/Logging')();
 
@@ -141,30 +121,23 @@ const r = new snoowrap({
 });
 
 // helper objects
-var Responder = require('./src/Responder')(r, DatabaseHandler,
-    {
-        gotError: gotError,
-        gotMessage: gotMessage,
-        sentResponse: () => {
-            genericInfo.sentResponses += 1;
-        },
-    });
-var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions},
-    {
-        gotError: gotError,
-        gotMessage: gotMessage,
-        hasPolled: () => {
-            genericInfo.timesPolled += 1;
-        },
-        hasReceived: () => {
-            genericInfo.timesReceived += 1;
-        },
-        hasFound: (username) => {
-            genericInfo.foundUsers += 1;
-            genericInfo.recentUser = username;
-        },
-    }
-);
+var Responder = require('./src/Responder')(r, DatabaseHandler, {
+    sentResponse: () => {
+        genericInfo.sentResponses += 1;
+    },
+});
+var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, champions: champions}, {
+    hasPolled: () => {
+        genericInfo.timesPolled += 1;
+    },
+    hasReceived: () => {
+        genericInfo.timesReceived += 1;
+    },
+    hasFound: (username) => {
+        genericInfo.foundUsers += 1;
+        genericInfo.recentUser = username;
+    },
+});
 
 // check if we have the servers and champions
 function isReady() {
@@ -200,7 +173,7 @@ function isReady() {
                 }
 
                 // reformat champions
-                for(var key in champions){
+                for (var key in champions) {
                     champions[champions[key]['champkey']] = champions[key];
                     champions[champions[key]['pretty_name']] = champions[key];
                 }
@@ -246,13 +219,17 @@ setInterval(() => {
     genericInfo.nextTimer = genericInfo.nextTimer + 1000;
 }, 1000);
 
-// // refresh the guid for the console
-// const showGui = () => {
-//     ConsoleTemplate(genericInfo, config);
-// };
-// // Show the console gui
-// showGui();
-// setInterval(showGui, 1000);
+// if the gui parameter is given ,start showing the gui
+if (options.gui) {
+    // refresh the guid for the console
+    const showGui = () => {
+        ConsoleTemplate(genericInfo, config);
+    };
+    // Show the console gui
+    showGui();
+    setInterval(showGui, 1000);
+}
+
 
 // start polling
 start();

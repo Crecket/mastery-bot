@@ -9,7 +9,7 @@ config.champion_highscores_limit = 1;
 config.total_highscores_limit = 1;
 
 // check every 'x' ms
-config.pollTimer = 10 * 1000;
+config.pollTimer = 15 * 1000;
 
 // api lookup and useragent to use
 config.api_base = "https://www.masterypoints.com/api/v1.0";

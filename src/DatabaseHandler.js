@@ -1,7 +1,7 @@
 // get sql module
 var sqlite3 = require("sqlite3").verbose();
 
-module.exports = function (callbacks) {
+module.exports = function () {
     var Logging = require('./Logging')();
 
     var DatabaseHandler = {
@@ -25,7 +25,6 @@ module.exports = function (callbacks) {
             try {
                 this.db.get("SELECT * FROM comments WHERE id = ?", id, (err, row) => {
                     if (err) {
-                        callbacks.gotError(err);
                         Logging('red', err);
                         return;
                     }
@@ -48,7 +47,6 @@ module.exports = function (callbacks) {
             try {
                 this.db.get("SELECT * FROM response WHERE id = ? AND sent = 1", id, (err, row) => {
                     if (err) {
-                        callbacks.gotError(err);
                         Logging('red', err);
                         return;
                     }
@@ -83,7 +81,6 @@ module.exports = function (callbacks) {
             try {
                 this.db.all("SELECT * FROM response WHERE sent = 0 LIMIT 5", (err, rows) => {
                     if (err) {
-                        callbacks.gotError(err);
                         Logging('red', err);
                         return;
                     }

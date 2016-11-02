@@ -79,7 +79,6 @@ module.exports = function (r, DatabaseHandler, callbacks) {
                                 // next item
                                 Responder.next();
                             }).catch(err => {
-                                callbacks.gotError({err: err});
 
                                 // comment may not exist or some other error was thrown
                                 Logging('red', 'Failed to reply to comment ID: ' + response.id);
@@ -103,7 +102,6 @@ module.exports = function (r, DatabaseHandler, callbacks) {
                     });
                 })
                 .catch(err => {
-                    callbacks.gotError(err);
 
                     // comment may not exist or some other error was thrown
                     Logging('red', 'Failed to fetch comment ID: ' + response.id);

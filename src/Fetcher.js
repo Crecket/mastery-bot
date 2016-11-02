@@ -56,7 +56,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                             Fetcher.summonerApiCallback(message, body);
                         },
                         (err, body) => {
-                            callbacks.gotError(err);
                             Logging('red', 'Error!');
                             Logging('red', err);
                         }
@@ -93,7 +92,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                             Fetcher.championApiCallback(message, body);
                         },
                         (err, body) => {
-                            callbacks.gotError(err);
                             Logging('red', 'Error!');
                             Logging('red', err);
                         }
@@ -129,7 +127,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                             Fetcher.championApiCallback(message, body);
                         },
                         (err, body) => {
-                            callbacks.gotError(err);
                             Logging('red', 'Error!');
                             Logging('red', err);
                         }
@@ -146,7 +143,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
             try {
                 result = JSON.parse(body);
             } catch (err) {
-                callbacks.gotError(err);
             }
 
             // get information
@@ -179,7 +175,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
             try {
                 result = JSON.parse(body);
             } catch (err) {
-                callbacks.gotError(err);
             }
 
             if (result) {
@@ -198,7 +193,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
             try {
                 result = JSON.parse(body);
             } catch (err) {
-                callbacks.gotError(err);
             }
 
             // get information
@@ -314,7 +308,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                 // mark all messages as read
                 Fetcher.markRead(messages);
             }).catch(err => {
-                callbacks.gotError(err);
                 Logging('red', 'Failed to get unread messages');
                 Logging('red', err);
             });
