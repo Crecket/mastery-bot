@@ -1,3 +1,4 @@
 /src/config/config.js
 /node_modules/
 /bower_components/
+/database.db
