@@ -20,8 +20,8 @@ module.exports = {
             if (tempSplit.length === 2) {
                 // push to result list
                 highscores_result.push({
-                    champion: tempSplit[0],
-                    server: tempSplit[1]
+                    champion: tempSplit[0].trim(),
+                    server: tempSplit[1].trim()
                 });
             }
         }

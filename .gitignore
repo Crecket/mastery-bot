@@ -1,9 +1,4 @@
 /src/config/config.js
-/node_modules
+/node_modules/
+/bower_components/
 /database.db
-/npm-debug.log.*
-/bower_components
-/template/node_modules/
-/template/bower_components/
-/src/certs/*
-!/src/certs/empty

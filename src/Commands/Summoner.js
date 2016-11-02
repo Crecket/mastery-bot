@@ -26,7 +26,7 @@ module.exports = {
                 // push to result list
                 result_summoners.push({
                     summoner: tempSplit[0],
-                    server: tempSplit[1]
+                    server: tempSplit[1].trim()
                 });
             }
         }
