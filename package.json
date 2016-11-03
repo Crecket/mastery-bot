@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +16,8 @@
     "snoowrap": "^1.4.1",
     "sqlite3": "^3.1.4",
     "xregexp": "^3.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2"
   }
 }

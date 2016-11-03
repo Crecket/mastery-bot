@@ -1,58 +1,13 @@
 "use strict";
-/** =============== response tests ============== */
 
-// const ChampionHighscoresResponseTemplate = require('./src/ResponseTemplates/ChampionHighscores');
-// const fs = require('fs');
-//
-// var testdata = JSON.parse(fs.readFileSync('./tests/sampleData/championHighscoreData.json'));
-// var champions = JSON.parse(fs.readFileSync('./tests/sampleData/championTestData.json'));
-//
-// var res = ChampionHighscoresResponseTemplate(testdata.highscores, champions.champions);
-//
-// console.log(res);
-// process.exit();
-
-/** =============== parsing tests ============== */
-
-// var str =
-//     "/u/mastery_bot crecket / euw " +
-//     "u/mastery_bot crecket / euw " +
-//     "/u/mastery_bot @champion cho'gath / any " +
-//     "u/mastery_bot @champion cho'gath / euw " +
-//     "/u/mastery_bot @total any " +
-//     "u/mastery_bot @total euw ";
-//
-// const Parser = require('./src/Parser');
-//
-// var res = Parser.parseBody(str);
-//
-// console.log(res);
-//
-// process.exit();
-
-/** =============== end tests ============== */
-
-// var str =
-//     "/u/mastery_bot crecket / euw " +
-//     "u/mastery_bot crecket / euw " +
-//     "/u/mastery_bot @champion cho'gath / any " +
-//     "u/mastery_bot @champion cho'gath / euw " +
-//     "/u/mastery_bot @total any " +
-//     "u/mastery_bot @total euw ";
-//
-// const Parser = require('./src/Parser');
-//
-// var res = Parser.parseBody(str);
-//
-// console.log(res);
-//
-// process.exit();
+// Main masterybot module
+// var MasteryBot = require('./src/MasteryBot').default;
 
 // npm modules
 const snoowrap = require('snoowrap');
 
 // custom modules
-var config = require('./src/config/config.js');
+const config = require('./src/config/config.js');
 
 // command line arguments
 const commandLineArgs = require('command-line-args');
@@ -65,13 +20,11 @@ const options = commandLineArgs([
         type: Boolean,
         defaultValue: false
     },
-    {
-        name: 'logging',
-        alias: 'l',
-        type: Boolean,
-        defaultValue: false
-    },
 ]);
+
+// var test = new MasteryBot(options, config);
+// test.start();
+// process.exit();
 
 // holds some stats for the server
 var genericInfo = {

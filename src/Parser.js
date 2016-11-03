@@ -9,8 +9,6 @@ const TotalParser = require('./Commands/Total');
  * u/mastery_bot crecket / euw
  * /u/mastery_bot @champion riven / euw
  * u/mastery_bot @champion riven / any
- * /u/mastery_bot @total euw
- * u/mastery_bot @total any
  *
  */
 
