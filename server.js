@@ -41,9 +41,9 @@ var genericInfo = {
         messageList: [],
     },
     // server list storage, is fetched from api
-    servers = true,
+    servers = false,
     // champion list storage, is fetched from api
-    champions = true;
+    champions = false;
 
 // helpers and classes
 var RequestHandler = require('./src/RequestHandler.js');
@@ -85,30 +85,8 @@ var Fetcher = require('./src/Fetcher')(r, DatabaseHandler, {servers: servers, ch
     },
 });
 
-// check if we have the servers and champions
-function isReady() {
-    if (servers === true) {
-        servers = false;
-        Logging('cyan', 'Loading servers');
-        RequestHandler.request(
-            config.api_base + '/static/servers',
-            (result) => {
-                var serversJson = JSON.parse(result);
-                if (serversJson.servers) {
-                    servers = serversJson.servers;
-                }
-                Fetcher.updateServers(servers);
-                isReady();
-            },
-            (err) => {
-                servers = false;
-                Logging('red', 'Error!');
-                Logging('red', err);
-            }
-        );
-    }
-    if (champions === true) {
-        champions = false;
+var loadChampions = new Promise((resolve, reject)=> {
+    if (!champions) {
         Logging('cyan', 'Loading champions');
         RequestHandler.request(
             config.api_base + '/static/champions',
@@ -125,43 +103,54 @@ function isReady() {
                 }
 
                 Fetcher.updateChampions(champions);
-                isReady();
+                resolve();
             },
             (err) => {
                 champions = false;
                 Logging('red', 'Error!');
                 Logging('red', err);
+                reject();
             }
         );
+    } else {
+        resolve();
     }
+});
 
-    // champions|server have to be a object
-    // databaseready has to be true
-    if (champions !== true && champions !== false && servers !== true && servers !== false) {
-        // we have all requirements, run anything that needs the champions or server list
+var loadServers = new Promise((resolve, reject)=> {
+    if (!servers) {
+        Logging('cyan', 'Loading servers');
+        RequestHandler.request(
+            config.api_base + '/static/servers',
+            (result) => {
+                var serversJson = JSON.parse(result);
+                if (serversJson.servers) {
+                    servers = serversJson.servers;
+                }
+                Fetcher.updateServers(servers);
+                resolve();
+            },
+            (err) => {
+                servers = false;
+                Logging('red', 'Error!');
+                Logging('red', err);
+                reject();
+            }
+        );
+    } else {
+        resolve();
+    }
+});
+
+// check if we have the servers and champions
+function runFetcher() {
+    Promise.all([loadChampions, loadServers]).then((result) => {
         Fetcher.checkMessages();
-    }
-}
-
-// main poll start function
-function start() {
-    setTimeout(()=> {
-        // wait a bit for everything to be online
-        isReady();
-        Responder.getResponses();
-    }, 500);
-
-    // timer
-    setInterval(()=> {
-        isReady();
-        Responder.getResponses();
-        genericInfo.nextTimer = 0;
-    }, config.pollTimer);
+    });
 }
 
 // 1 second timer to keep track of the main timer progress. used in the gui
 setInterval(() => {
-    // minus 1 every second to keep track of the timer
     genericInfo.nextTimer = genericInfo.nextTimer + 1000;
 }, 1000);
 
@@ -176,6 +165,13 @@ if (options.gui) {
     setInterval(showGui, 1000);
 }
 
+// run the initial round
+runFetcher();
+Responder.getResponses();
 
-// start polling
-start();
+// main timer
+setInterval(()=> {
+    runFetcher();
+    Responder.getResponses();
+    genericInfo.nextTimer = 0;
+}, config.pollTimer);
