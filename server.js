@@ -1,8 +1,5 @@
 "use strict";
 
-// Main masterybot module
-// var MasteryBot = require('./src/MasteryBot').default;
-
 // npm modules
 const snoowrap = require('snoowrap');
 
@@ -21,10 +18,6 @@ const options = commandLineArgs([
         defaultValue: false
     },
 ]);
-
-// var test = new MasteryBot(options, config);
-// test.start();
-// process.exit();
 
 // holds some stats for the server
 var genericInfo = {
