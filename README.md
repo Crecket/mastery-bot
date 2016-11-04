@@ -15,6 +15,13 @@ A response is generated and stored in a SQLITE database with status `sent` set t
 
 During all this we check the database for rows with status == 0. Once we find one we attempt to respond to the original comment using the generated response.
 
+## Possible commands
+1. Summoner profile:
+Format: `/u/mastery_bot <summoner_name> / <server>`
+2. Champion highscores:
+Format: `/u/mastery_bot @champion <champion name> / <server>`
+You can enter a normal server or use `any` to receive a highscore across all servers
+
 ## Installation
 1. Clone or download this repo
 2. Install the required libraries `npm install`
