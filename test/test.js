@@ -32,7 +32,7 @@ describe('Parser', function () {
 });
 
 describe('ResponseTemplates', function () {
-        it('should find 2 champion highscores', function () {
+        it('should generate a non-empty template', function () {
             // finish without errors
             var response = ChampionHighscoresResponseTemplate(championHighscoreData.highscores, championTestData.champions);
             assert.ok(response);

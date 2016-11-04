@@ -28,6 +28,8 @@ During all this we check the database for rows with status == 0. Once we find on
 ## Tests
 Right now only some very basic tests have been added. I'll be adding more in the feature to test the database, API calls and fetch/response objects.
 
+Run the tests using `npm test`
+
 ## Issues
 - Setting the user limit to more than 1 will cause the bot to respond to reply multiple times to the same comment. This should be solved by combining multiple user templates into 1 comment.
 - The main isReady() function should be re-written to use promisses 
