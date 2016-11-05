@@ -20,8 +20,8 @@ module.exports = {
             if (tempSplit.length === 2) {
                 // push to result list
                 highscores_result.push({
-                    champion: tempSplit[0].trim(),
-                    server: tempSplit[1].trim()
+                    champion: tempSplit[0].trim().toLowerCase(),
+                    server: tempSplit[1].trim().toLowerCase()
                 });
             }
         }

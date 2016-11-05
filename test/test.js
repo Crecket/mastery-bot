@@ -7,14 +7,13 @@ const ChampionHighscoresResponseTemplate = require('../src/ResponseTemplates/Cha
 const championHighscoreData = JSON.parse(fs.readFileSync('./test/sampleData/championHighscoreData.json'));
 const championTestData = JSON.parse(fs.readFileSync('./test/sampleData/championTestData.json'));
 
-var testString =
-    "lorem ipsum /u/mastery_bot crecket / euw lorem ipsum " +
-    "lorem ipsum u/mastery_bot crecket / euw lorem ipsum " +
-    "lorem ipsum /u/mastery_bot @champion cho'gath / any lorem ipsum " +
-    "lorem ipsum u/mastery_bot @champion cho'gath / euw lorem ipsum ";
-
 describe('Parser', function () {
     describe('parseBody', function () {
+        var testString =
+            "lorem ipsum /u/mastery_bot crecket / euw lorem ipsum " +
+            "lorem ipsum u/mastery_bot joeri r / euw lorem ipsum " +
+            "lorem ipsum /u/mastery_bot @champion riven / any lorem ipsum " +
+            "lorem ipsum u/mastery_bot @champion cho'gath / euw lorem ipsum ";
         var parseResult = Parser.parseBody(testString);
 
         it('should return object with 2 keys', function () {
@@ -32,9 +31,19 @@ describe('Parser', function () {
 });
 
 describe('ResponseTemplates', function () {
-        it('should generate a non-empty template', function () {
+    describe('ChampionHighscores', function () {
+        it('should generate a non-empty champion highscores teamplte', function () {
             // finish without errors
             var response = ChampionHighscoresResponseTemplate(championHighscoreData.highscores, championTestData.champions);
             assert.ok(response);
         });
+    });
+
+    // describe('Summoner', function () {
+    //     it('should generate a non-empty summoner template', function () {
+    //         // finish without errors
+    //         var response = ChampionHighscoresResponseTemplate(championHighscoreData.highscores, championTestData.champions);
+    //         assert.ok(response);
+    //     });
+    // });
 });

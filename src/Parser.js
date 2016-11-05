@@ -1,6 +1,5 @@
 const SummonerParser = require('./Commands/Summoner');
 const ChampionParser = require('./Commands/Champion');
-const TotalParser = require('./Commands/Total');
 
 /**
  * commands
@@ -19,7 +18,6 @@ module.exports = {
         // run through parsers
         resultData.summoners = SummonerParser.parseBody(string);
         resultData.champion_highscores = ChampionParser.parseBody(string);
-        // resultData.total_highscores = TotalParser.parseBody(string);
 
         // return results
         return resultData;

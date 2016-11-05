@@ -1,7 +1,6 @@
 "use strict";
 
 var ChampionHighscoresResponseTemplate = require('./ResponseTemplates/ChampionHighscores');
-var TotalHighscoresResponseTemplate = require('./ResponseTemplates/TotalHighscores');
 var SummonerResponseTemplate = require('./ResponseTemplates/Summoner');
 var RequestHandler = require('./RequestHandler.js');
 var Parser = require('./Parser.js');
@@ -66,12 +65,18 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                 var champion_highscores = resultingData.champion_highscores;
 
                 champion_highscores.map((resultingUser, userIndex) => {
-                    if (!Fetcher.serverValid(resultingUser['server'])) {
+                    if (
+                        resultingUser['server'] !== "any" && !Fetcher.serverValid(resultingUser['server'])
+                    ) {
                         // server entered is invalid, remove it from the list
                         delete champion_highscores[userIndex];
-                    } else if (!Fetcher.championValid(resultingUser['champion'])) {
+
+                    } else if (
+                        resultingUser['champion'] !== "any" && !Fetcher.championValid(resultingUser['champion'])
+                    ) {
                         // champion entered is invalid, remove it from the list
                         delete champion_highscores[userIndex];
+
                     }
                 });
 
@@ -82,9 +87,13 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
 
                 // loop through found users
                 for (var championKey in champion_highscores) {
+                    // check for a 'any' wildcard
+                    var champion_id = (champion_highscores[championKey]['champion'] === "any") ? 0 :
+                        champions[champion_highscores[championKey]['champion']]['id'];
+
+                    // create the api url
                     var targetUrl = config.api_base + '/highscores/champion' +
-                        '/' + champions[champion_highscores[championKey]['champion']]['id'] +
-                        '/0/20/' + champion_highscores[championKey]['server'];
+                        '/' + champion_id + '/0/20/' + champion_highscores[championKey]['server'];
 
                     RequestHandler.request(
                         targetUrl,
@@ -98,73 +107,6 @@ module.exports = function (r, DatabaseHandler, staticData, callbacks) {
                     );
                 }
 
-            } else if (resultingData.champion_highscores.length > 0) {
-                var champion_highscores = resultingData.champion_highscores;
-
-                champion_highscores.map((resultingUser, userIndex) => {
-                    if (!Fetcher.serverValid(resultingUser['server'])) {
-                        // server entered is invalid, remove it from the list
-                        delete champion_highscores[userIndex];
-                    } else if (!Fetcher.championValid(resultingUser['champion'])) {
-                        // champion entered is invalid, remove it from the list
-                        delete champion_highscores[userIndex];
-                    }
-                });
-
-                // set the max amount of highscores to lookup
-                champion_highscores = champion_highscores.slice(0, config.champion_highscores_limit);
-                Logging('cyan', 'Found champion highscores: ');
-                Logging(false, champion_highscores);
-
-                // loop through found users
-                for (var championKey in champion_highscores) {
-                    var targetUrl = config.api_base + '/champion' +
-                        '/' + champion_highscores[championKey]['id'] +
-                        '/0/20/' + champion_highscores[championKey]['server'];
-                    RequestHandler.request(
-                        targetUrl,
-                        (body) => {
-                            Fetcher.championApiCallback(message, body);
-                        },
-                        (err, body) => {
-                            Logging('red', 'Error!');
-                            Logging('red', err);
-                        }
-                    );
-                }
-
-            }
-        },
-
-        // total points highscores api lookup callback
-        totalApiCallback: (message, body) => {
-            // attempt to parse data
-            var result = false;
-            try {
-                result = JSON.parse(body);
-            } catch (err) {
-            }
-
-            // get information
-            var topChampions = {},
-                summonerMastery = false,
-                summonerInfo = false;
-            if (
-                result &&
-                result.summoner_mastery &&
-                result.summoner_mastery.mastery_data.length > 0 &&
-                result.summoner_info
-            ) {
-                // store data
-                topChampions = result.summoner_mastery.mastery_data.slice(0, 5);
-                summonerInfo = result.summoner_info;
-                summonerMastery = result.summoner_mastery;
-
-                // create markup template
-                var markupCode = ChampionHighscoresResponseTemplate(summonerInfo, summonerMastery, topChampions, champions);
-
-                // this ID is new, insert into the database
-                DatabaseHandler.insert_response(message.id, markupCode);
             }
         },
 
