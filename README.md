@@ -1,5 +1,8 @@
 mastery-bot
 ===========
+
+[![Travis](https://img.shields.io/travis/Crecket/mastery-bot.svg)](https://travis-ci.org/Crecket/mastery-bot)
+
 A reddit bot ([/u/mastery_bot](https://www.reddit.com/user/mastery_bot/)) which responds to username mentions with information about a summoner's mastery points. 
 
 All data is fetched from https://www.masterypoints.com.
