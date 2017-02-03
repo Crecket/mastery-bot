@@ -1,7 +1,7 @@
 mastery-bot
 ===========
 
-[![Travis](https://img.shields.io/travis/Crecket/mastery-bot.svg)](https://travis-ci.org/Crecket/mastery-bot)
+[![Travis](https://img.shields.io/travis/Crecket/mastery-bot.svg)](https://travis-ci.org/Crecket/mastery-bot) [![Beerpay](https://beerpay.io/Crecket/mastery-bot/badge.svg?style=beer-square)](https://beerpay.io/Crecket/mastery-bot)   [![Beerpay](https://beerpay.io/Crecket/mastery-bot/make-wish.svg?style=flat-square)](https://beerpay.io/Crecket/mastery-bot?focus=wish)
 
 A reddit bot ([/u/mastery_bot](https://www.reddit.com/user/mastery_bot/)) which responds to username mentions with information about a summoner's mastery points. 
 
