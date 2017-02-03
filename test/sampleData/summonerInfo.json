@@ -1,0 +1,860 @@
+{
+  "summoner_info": {
+    "last_info_update": "2017-02-03 14:44:07",
+    "id": 27473480,
+    "name": "Crecket",
+    "shortName": "crecket",
+    "server": "euw",
+    "icon": 1439,
+    "tier": "Unranked",
+    "division": false
+  },
+  "summoner_mastery": {
+    "last_mastery_update": "2017-02-03 14:44:08",
+    "total_champions": 119,
+    "total_mastered": 16,
+    "total_mastery_level": 321,
+    "total_points": 1266045,
+    "total_points_rank": 74830,
+    "mastery_data": [
+      {
+        "mastery_level": "6",
+        "champion": "67",
+        "points": "101713",
+        "mastery_level_estimate": "11",
+        "tokens": "2",
+        "name": "Crecket",
+        "server": "euw",
+        "last_summoner_update": "2017-02-03 14:44:07",
+        "added": "2016-06-02 14:24:45"
+      },
+      {
+        "mastery_level": "6",
+        "champion": "236",
+        "points": "66431",
+        "mastery_level_estimate": "8",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "6",
+        "champion": "41",
+        "points": "52619",
+        "mastery_level_estimate": "7",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "6",
+        "champion": "412",
+        "points": "52016",
+        "mastery_level_estimate": "7",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "6",
+        "champion": "64",
+        "points": "45090",
+        "mastery_level_estimate": "6",
+        "tokens": "1"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "107",
+        "points": "38929",
+        "mastery_level_estimate": "6",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "6",
+        "champion": "15",
+        "points": "35174",
+        "mastery_level_estimate": "6",
+        "tokens": "1"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "76",
+        "points": "34881",
+        "mastery_level_estimate": "6",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "157",
+        "points": "29749",
+        "mastery_level_estimate": "5",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "81",
+        "points": "25405",
+        "mastery_level_estimate": "5",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "202",
+        "points": "25354",
+        "mastery_level_estimate": "5",
+        "tokens": "1"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "133",
+        "points": "24673",
+        "mastery_level_estimate": "5",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "8",
+        "points": "23545",
+        "mastery_level_estimate": "5",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "432",
+        "points": "23345",
+        "mastery_level_estimate": "5",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "222",
+        "points": "22354",
+        "mastery_level_estimate": "5",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "5",
+        "champion": "22",
+        "points": "21771",
+        "mastery_level_estimate": "5",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "238",
+        "points": "20667",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "51",
+        "points": "18172",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "55",
+        "points": "17146",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "7",
+        "points": "17100",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "429",
+        "points": "16086",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "24",
+        "points": "15232",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "121",
+        "points": "15219",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "92",
+        "points": "15154",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "120",
+        "points": "15007",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "114",
+        "points": "14684",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "43",
+        "points": "14508",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "18",
+        "points": "13948",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "112",
+        "points": "13482",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "36",
+        "points": "12986",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "104",
+        "points": "12826",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "4",
+        "champion": "54",
+        "points": "12789",
+        "mastery_level_estimate": "4",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "20",
+        "points": "12566",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "58",
+        "points": "12565",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "42",
+        "points": "12472",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "69",
+        "points": "12407",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "40",
+        "points": "12095",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "119",
+        "points": "12058",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "26",
+        "points": "11677",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "103",
+        "points": "10930",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "126",
+        "points": "10901",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "110",
+        "points": "10557",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "102",
+        "points": "10440",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "23",
+        "points": "9804",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "150",
+        "points": "9792",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "203",
+        "points": "9656",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "59",
+        "points": "9638",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "254",
+        "points": "9318",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "29",
+        "points": "9302",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "17",
+        "points": "9254",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "1",
+        "points": "9022",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "2",
+        "points": "8633",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "60",
+        "points": "8504",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "105",
+        "points": "8297",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "68",
+        "points": "8098",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "98",
+        "points": "7828",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "245",
+        "points": "7691",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "48",
+        "points": "7243",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "80",
+        "points": "7201",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "61",
+        "points": "7026",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "134",
+        "points": "6370",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "3",
+        "champion": "85",
+        "points": "6229",
+        "mastery_level_estimate": "3",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "268",
+        "points": "5533",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "421",
+        "points": "5075",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "39",
+        "points": "4778",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "35",
+        "points": "4574",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "34",
+        "points": "4512",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "53",
+        "points": "4505",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "131",
+        "points": "3917",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "91",
+        "points": "3875",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "4",
+        "points": "3789",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "86",
+        "points": "3785",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "117",
+        "points": "3445",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "122",
+        "points": "3428",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "90",
+        "points": "3371",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "28",
+        "points": "3238",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "57",
+        "points": "3220",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "62",
+        "points": "3107",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "56",
+        "points": "3098",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "63",
+        "points": "2806",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "82",
+        "points": "2675",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "79",
+        "points": "2361",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "37",
+        "points": "2345",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "201",
+        "points": "2270",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "45",
+        "points": "2037",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "2",
+        "champion": "106",
+        "points": "2001",
+        "mastery_level_estimate": "2",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "127",
+        "points": "1694",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "75",
+        "points": "1687",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "74",
+        "points": "1679",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "154",
+        "points": "1672",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "99",
+        "points": "1593",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "240",
+        "points": "1379",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "12",
+        "points": "1305",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "33",
+        "points": "1285",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "19",
+        "points": "1196",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "115",
+        "points": "1169",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "161",
+        "points": "1123",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "267",
+        "points": "1089",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "78",
+        "points": "970",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "14",
+        "points": "941",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "89",
+        "points": "936",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "9",
+        "points": "933",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "5",
+        "points": "866",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "3",
+        "points": "812",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "83",
+        "points": "666",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "16",
+        "points": "595",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "266",
+        "points": "390",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "84",
+        "points": "387",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "13",
+        "points": "322",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "163",
+        "points": "300",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "164",
+        "points": "274",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "38",
+        "points": "220",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "111",
+        "points": "195",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "420",
+        "points": "195",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "32",
+        "points": "177",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "427",
+        "points": "176",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "96",
+        "points": "153",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "113",
+        "points": "151",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      },
+      {
+        "mastery_level": "1",
+        "champion": "143",
+        "points": "141",
+        "mastery_level_estimate": "1",
+        "tokens": "0"
+      }
+    ]
+  },
+  "summoner_ingame": false
+}
