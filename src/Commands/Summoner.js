@@ -6,7 +6,7 @@ module.exports = {
 
         // match all unicode chars in combination with the mastery tag and a server
         var found_matches = XRegExp.matchChain(string, [
-            {regex: /(?:([\/]?u\/mastery_bot)\s{1,2}[^@][\x00-\x7Fa-zA-Z0-9 _\\.!/]{2,20}\s{1,2}\/\s{1,2}[a-zA-Z]{2,4})/g},
+            {regex: /(?:([\/]?u\/mastery_bot)\s{1,2}[^@][\x00-\x7Fa-zA-Z0-9 _\\.!/]{2,20}\s{1,3}\/\s{0,3}[a-zA-Z]{2,4})/g},
         ]);
 
         // loop through regex matches
