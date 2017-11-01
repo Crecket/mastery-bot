@@ -1,7 +1,7 @@
 mastery-bot
 ===========
 
-[![Travis](https://img.shields.io/travis/Crecket/mastery-bot.svg)](https://travis-ci.org/Crecket/mastery-bot) [![Beerpay](https://beerpay.io/Crecket/mastery-bot/badge.svg?style=beer-square)](https://beerpay.io/Crecket/mastery-bot)   [![Beerpay](https://beerpay.io/Crecket/mastery-bot/make-wish.svg?style=flat-square)](https://beerpay.io/Crecket/mastery-bot?focus=wish)
+[![Travis](https://img.shields.io/travis/Crecket/mastery-bot.svg)](https://travis-ci.org/Crecket/mastery-bot) 
 
 A reddit bot ([/u/mastery_bot](https://www.reddit.com/user/mastery_bot/)) which responds to username mentions with information about a summoner's mastery points. 
 
@@ -44,7 +44,4 @@ Run the tests using `npm test`
 - Setting the user limit to more than 1 will cause the bot to respond to reply multiple times to the same comment. This should be solved by combining multiple user templates into 1 comment.
 - The main isReady() function should be re-written to use promisses 
 
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
 
-[![Beerpay](https://beerpay.io/Crecket/mastery-bot/badge.svg?style=beer-square)](https://beerpay.io/Crecket/mastery-bot)  [![Beerpay](https://beerpay.io/Crecket/mastery-bot/make-wish.svg?style=flat-square)](https://beerpay.io/Crecket/mastery-bot?focus=wish)
